@@ -10,6 +10,7 @@ class CommChar //communication characters
 {
 public:
     static char get(int ID); //get character by ID
+    static int getID(char character); //get ID of character
 
 private:
     const static char characters[]; //table with characters
@@ -20,4 +21,9 @@ const char CommChar::characters[] = {'x'};
 char CommChar::get(int ID)
 {
     return characters[ID];
+}
+
+int CommChar::getID(char character)
+{
+    
 }

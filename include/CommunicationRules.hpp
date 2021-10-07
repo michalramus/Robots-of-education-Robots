@@ -9,7 +9,7 @@ enum CommCharID //id of communication characters
 class CommChar //communication characters
 {
 public:
-    static char get(int ID); //get character by ID
+    static char getChar(int ID); //get character by ID
     static int getID(char character); //get ID of character
 
 private:
@@ -18,7 +18,7 @@ private:
 
 const char CommChar::characters[] = {'x'};
 
-char CommChar::get(int ID)
+char CommChar::getChar(int ID)
 {
     return characters[ID];
 }

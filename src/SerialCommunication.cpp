@@ -8,6 +8,10 @@ SerialCommunication::SerialCommunication(const int BaudRate) //constructor
 
 SerialCommunication::~SerialCommunication() //destructor
 {
-
+    //empty
 }
 
+String SerialCommunication::readValues()
+{
+    
+}

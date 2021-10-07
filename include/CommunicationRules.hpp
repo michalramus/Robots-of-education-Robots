@@ -1,29 +1,29 @@
 #include <Arduino.h>
 
-enum CommCharID //id of communication characters
+enum CommSymbolID //id of communication symbols
 {
     startEndMessage = 0, //symbol that is on the begin and end of message
 
 };
 
-class CommChar //communication characters
+class CommSymbol //communication symbols
 {
 public:
-    static char getChar(int ID); //get character by ID
-    static int getID(char character); //get ID of character
+    static String getSymbol(int ID); //get symbols by ID
+    static int getID(String symbol); //get ID of symbol
 
 private:
-    const static char characters[]; //table with characters
+    const static String symbols[]; //table with symbols
 };
 
-const char CommChar::characters[] = {'x'};
+const String CommSymbol::symbols[] = {'x'};
 
-char CommChar::getChar(int ID)
+String CommSymbol::getSymbol(int ID)
 {
-    return characters[ID];
+    return symbols[ID];
 }
 
-int CommChar::getID(char character)
+int CommSymbol::getID(String symbol)
 {
     
 }

@@ -1,5 +1,6 @@
 #include <SerialCommunication.hpp>
 #include <Arduino.h>
+#include <CommunicationRules.hpp>
 
 SerialCommunication::SerialCommunication(const int BaudRate) //constructor
 {
@@ -22,7 +23,7 @@ String SerialCommunication::readValues() //read values from Serial
         {
             message += Serial.readString();
 
-            if ((message[0] == 'x') && (message[sizeof(message) / sizeof(message[0]) - 1] == 'x')) //check if message transfer is completed
+            if ((message[0] == CommChar::getChar(CommCharID::startEndMessage)) && (message[sizeof(message) / sizeof(message[0]) - 1] == CommChar::getChar(CommCharID::startEndMessage))) //check if message transfer is completed
             {
                 messageReceived = true;
             }

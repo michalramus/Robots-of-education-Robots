@@ -1,12 +1,13 @@
 #include <SerialCommunication.hpp>
+#include <Arduino.h>
 
+SerialCommunication::SerialCommunication(const int BaudRate) //constructor
+{
+    Serial.begin(BaudRate); //Start Serial
+}
 
-SerialCommunication::SerialCommunication()
+SerialCommunication::~SerialCommunication() //destructor
 {
 
 }
 
-SerialCommunication::~SerialCommunication()
-{
-
-}

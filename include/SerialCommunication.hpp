@@ -2,10 +2,7 @@
 class SerialCommunication
 {
 private:
-    
 public:
-    SerialCommunication();
-    ~SerialCommunication();
+    SerialCommunication(const int BaudRate); //constructor
+    ~SerialCommunication();                  //destructor
 };
-
-

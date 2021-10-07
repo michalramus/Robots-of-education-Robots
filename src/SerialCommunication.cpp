@@ -20,11 +20,11 @@ String SerialCommunication::readValues() //read values from Serial
     {
         if (Serial.available() == true)
         {
-            message += Serial.available();
+            message += Serial.readString();
 
             if ((message[0] == 'x') && (message[sizeof(message) / sizeof(message[0]) - 1] == 'x')) //check if message transfer is completed
             {
-                messageReceived == true;
+                messageReceived = true;
             }
         }
     }

@@ -29,6 +29,9 @@ String SerialCommunication::readValues() //read values from Serial
             }
         }
     }
-        //TODO delete first and last character in message variable
+    //remove "x" character from start and end of message
+    message.remove(0);
+    message.remove(message.length() - 1);
+    
     return message;
 }

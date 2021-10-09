@@ -23,7 +23,7 @@ String SerialCommunication::readValues() //read values from Serial
         {
             message += Serial.readString();
 
-            if (((String)message[0] == CommSymbol::getSymbol(CommSymbolID::startEndMessage)) && ((String)message[sizeof(message) / sizeof(message[0]) - 1] == CommSymbol::getSymbol(CommSymbolID::startEndMessage))) //check if message transfer is completed
+            if (((String)message[0] == CommSymbol::getSymbol(CommSymbolID::startEndMessage)) && ((String)message[message.length() - 1] == CommSymbol::getSymbol(CommSymbolID::startEndMessage))) //check if message transfer is completed
             {
                 messageReceived = true;
             }

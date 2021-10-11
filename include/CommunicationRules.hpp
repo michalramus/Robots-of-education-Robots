@@ -8,7 +8,10 @@ enum CommSymbolID //id of communication symbols
 
 };
 
-//TODO: create DeviceType enum
+enum DevType //ID of device types
+{
+
+};
 
 class CommSymbol //communication symbols
 {

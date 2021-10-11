@@ -6,6 +6,8 @@ enum CommSymbolID //id of communication symbols
 
 };
 
+//TODO: create DeviceType enum
+
 class CommSymbol //communication symbols
 {
 public:
@@ -16,4 +18,4 @@ private:
     const static String symbols[]; //table with symbols
 };
 
-const String CommSymbol::symbols[] = {'x'};
+const String CommSymbol::symbols[] = {"x"};

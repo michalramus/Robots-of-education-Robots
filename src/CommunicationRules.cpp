@@ -7,7 +7,19 @@ String CommSymbol::getSymbol(int ID)
     return symbols[ID];
 }
 
-int CommSymbol::getID(String symbol)
+int CommSymbol::getID(String symbol) //get ID of symbol
 {
-    //TODO: create getID method body
+    return CommSymbol::getID(symbol, 0);
+}
+
+int CommSymbol::getID(String symbol, int startID) //get ID of symbol Start search from specific ID
+{
+    for (int i = startID; i < symbolsTabSize; i++) //iterate by table from startID
+    {
+        if (CommSymbol::symbols[i] == symbol) //check symbol
+        {
+            return i;
+        }
+    }
+    //TODO: throw the exception
 }

@@ -19,5 +19,3 @@ public:
 private:
     const static String symbols[]; //table with symbols
 };
-
-const String CommSymbol::symbols[] = {"x"};

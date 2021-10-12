@@ -1,4 +1,4 @@
-#include <CommunicationRules.hpp>
+#include "CommunicationRules.hpp"
 
 const String CommSymbol::symbols[] = {"x"}; //table with symbols
 

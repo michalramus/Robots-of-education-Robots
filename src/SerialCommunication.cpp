@@ -1,6 +1,6 @@
-#include <SerialCommunication.hpp>
 #include <Arduino.h>
-#include <CommunicationRules.hpp>
+#include "CommunicationRules.hpp"
+#include "SerialCommunication.hpp"
 
 SerialCommunication::SerialCommunication(const int BaudRate) //constructor
 {

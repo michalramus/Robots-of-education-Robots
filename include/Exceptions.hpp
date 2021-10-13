@@ -1,0 +1,7 @@
+class Exceptions
+{
+public:
+
+private:
+
+};

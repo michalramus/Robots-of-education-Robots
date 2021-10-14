@@ -1,7 +1,8 @@
 #include <unity.h>
 #include "Process.cpp"
 
-#pragma once
+#ifndef TEST_MAIN.CPP
+#define TEST_MAIN.CPP
 
 #ifdef ARDUINO //check if tests are running on Arduino
 //if testing on Arduino ...
@@ -33,5 +34,7 @@ int main(int argc, char **argv)
 
     return 0;
 }
+
+#endif
 
 #endif

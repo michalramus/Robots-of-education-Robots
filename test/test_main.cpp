@@ -10,7 +10,9 @@
 
 void setup()
 {
+    UNITY_BEGIN();
     process(); //run tests
+    UNITY_END();
 }
 
 void loop() //signalize tests' end on Arduino led
@@ -25,7 +27,9 @@ void loop() //signalize tests' end on Arduino led
 
 int main(int argc, char **argv)
 {
+    UNITY_BEGIN();
     process(); //run tests
+    UNITY_END();
 
     return 0;
 }

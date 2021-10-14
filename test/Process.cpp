@@ -1,4 +1,4 @@
-#include "tests/test_CommunicationRules.cpp"
+#include "../tests/test_CommunicationRules.cpp"
 
 #pragma once
 

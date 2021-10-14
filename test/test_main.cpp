@@ -4,8 +4,7 @@
 #ifndef TEST_MAIN.CPP
 #define TEST_MAIN.CPP
 
-#ifdef ARDUINO //check if tests are running on Arduino
-//if testing on Arduino ...
+#ifdef ARDUINO //check if tests are running on Arduino ...
 
 #include <Arduino.h>
 

@@ -7,7 +7,7 @@ enum CommSymbolID //id of communication symbols
     startEndMessage = 0, //symbol that is on the begin and end of message
 
 
-    symbolsTabSize, //ID is equal to symbols tab size. IT HAVE TO BE AT THE END OF ENUM
+    symbolsTabSize, //ID is equal to symbols tab size. IT HAS TO BE AT THE END OF ENUM
 };
 
 enum DevType //ID of device types

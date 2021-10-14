@@ -4,8 +4,7 @@
 class SerialCommunication
 {
 public:
-    SerialCommunication(const int BaudRate); //constructor
-    ~SerialCommunication();                  //destructor
+    void setBaudRate(int baudRate);
 
     int getValues(); //get information from communication
 

@@ -1,8 +1,8 @@
 #include <unity.h>
 #include "Process.cpp"
 
-#ifndef TEST_MAIN.CPP
-#define TEST_MAIN.CPP
+#ifndef TEST_MAIN_CPP
+#define TEST_MAIN_CPP
 
 #ifdef ARDUINO //check if tests are running on Arduino ...
 

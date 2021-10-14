@@ -2,14 +2,9 @@
 #include "CommunicationRules.hpp"
 #include "SerialCommunication.hpp"
 
-SerialCommunication::SerialCommunication(const int BaudRate) //constructor
+void SerialCommunication::setBaudRate(int baudRate)
 {
-    Serial.begin(BaudRate); //Start Serial
-}
-
-SerialCommunication::~SerialCommunication() //destructor
-{
-    //empty
+    Serial.begin(baudRate); //Start Serial
 }
 
 String SerialCommunication::readValues() //read values from Serial

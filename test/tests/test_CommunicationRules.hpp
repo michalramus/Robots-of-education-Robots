@@ -1,6 +1,10 @@
 #include "CommunicationRules.hpp"
 #include <unity.h>
 
+
+#ifndef TEST_COMMUNICATION_RULES_HPP
+#define TEST_COMMUNICATION_RULES_HPP
+
 class test_CommunicationRules
 {
     public:
@@ -56,3 +60,5 @@ void test_CommunicationRules_process() //call all tests
     RUN_TEST(test_CommunicationRules::test_getID_2arg_tryToGetIDWithIncorrectStartID);
     RUN_TEST(test_CommunicationRules::test_getID_2arg_tryToGetIDWithIncorrectStartIDAndSymbol);
 }
+
+#endif

@@ -1,8 +1,11 @@
-#include "tests/test_CommunicationRules.cpp"
+//#include "tests/test_CommunicationRules.cpp"
 
-#pragma once
+#ifndef PROCESS_HPP
+#define PROCESS_HPP
 
 void process()//function that contain all process functions
 {
     test_CommunicationRules_process();
 }
+
+#endif

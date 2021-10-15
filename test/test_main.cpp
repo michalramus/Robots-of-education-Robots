@@ -1,5 +1,5 @@
 #include <unity.h>
-#include "Process.cpp"
+#include "Process.hpp"
 
 #ifndef TEST_MAIN_CPP
 #define TEST_MAIN_CPP

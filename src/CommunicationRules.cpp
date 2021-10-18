@@ -1,6 +1,9 @@
 #include "CommunicationRules.hpp"
+#include <WString.h>
 
-const String CommSymbol::symbols[] = {"x"}; //table with symbols
+const String CommSymbol::symbols[] = {
+                                        "x",
+                                        "type", "error", "config", "information"}; //table with symbols
 
 String CommSymbol::getSymbol(int ID)
 {

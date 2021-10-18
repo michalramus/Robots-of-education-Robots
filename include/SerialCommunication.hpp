@@ -6,9 +6,13 @@ class SerialCommunication
 public:
     static void setBaudRate(int baudRate);
 
-    static String readValues(); //read values from Serial
-    //TODO: create some send methods
-
-private:
+    static String readMessage(); //read values from Serial
     
+    static void sendMessage(String message); //send message
+    static void sendLastMessage(); //send last message
+    static void sendMessageReceived(); //send message, that last message was received
+    
+private:
+
+    static String lastReceivedMessage;
 };

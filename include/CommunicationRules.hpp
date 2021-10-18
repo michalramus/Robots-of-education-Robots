@@ -1,4 +1,4 @@
-#include <Arduino.h>
+#include <WString.h>
 
 #pragma once
 
@@ -6,6 +6,10 @@ enum CommSymbolID //id of communication symbols
 {
     startEndMessage = 0, //symbol that is on the begin and end of message
 
+    messageType, //types of message
+    msgTypeError,
+    msgTypeConfig,
+    msgTypeInfo,
 
     symbolsTabSize, //ID is equal to symbols tab size. IT HAS TO BE AT THE END OF ENUM
 };

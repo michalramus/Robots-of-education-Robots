@@ -10,6 +10,7 @@ enum CommSymbolID //id of communication symbols
     msgTypeError,
     msgTypeConfig,
     msgTypeInfo,
+    msgTypeTask,
 
     symbolsTabSize, //ID is equal to symbols tab size. IT HAS TO BE AT THE END OF ENUM
 };

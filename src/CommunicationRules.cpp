@@ -3,7 +3,7 @@
 
 const String CommSymbol::symbols[] = {
                                         "x",
-                                        "type", "error", "config", "information"}; //table with symbols
+                                        "type", "error", "config", "information", "task"}; //table with symbols
 
 String CommSymbol::getSymbol(int ID)
 {

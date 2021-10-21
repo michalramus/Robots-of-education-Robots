@@ -12,6 +12,9 @@ class test_CommunicationRules
     //getSymbol
     static void test_getSymbol_getCorrectSymbol()
     {
+        TEST_ASSERT(CommSymbol::getSymbol(0) == "x");
+        TEST_ASSERT(CommSymbol::getSymbol(3) == "config");
+        TEST_ASSERT(CommSymbol::getSymbol(5) == "task");
     }
 
     static void test_getSymbol_TryToGetSymbolByIncorrectID()

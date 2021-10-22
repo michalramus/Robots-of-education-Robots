@@ -13,18 +13,18 @@ public:
 private:
     void deserializeMessage(String message, JsonDocument &doc); //deserialize message to JsonDocument
 
-    int getMessageTypeID(JsonDocument &doc); //get message type ID
+    uint16_t getMessageTypeID(JsonDocument &doc); //get message type ID
 
     void setupConfigMsg(JsonDocument &doc); //setup message as config
 
      const static int JSON_BUFFER_SIZE = 30; //TODO: set buffer size
 
-    int messageType = -1;
+    uint16_t messageType = -1;
 
         //config
     //car
-    int* devTypes;
-    int numOfCar = -1;
+    uint16_t* devTypes;
+    uint16_t numOfCar = -1;
 };
 
 

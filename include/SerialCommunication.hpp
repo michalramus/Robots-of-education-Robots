@@ -4,7 +4,7 @@
 class SerialCommunication
 {
 public:
-    static void setBaudRate(int baudRate);
+    static void setBaudRate(uint16_t baudRate);
 
     static String readMessage(); //read values from Serial
     

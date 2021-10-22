@@ -1,4 +1,4 @@
-#include "tests/test_SymbolsBase.hpp"
+#include "test_SymbolsBase/test_SymbolsBase.hpp"
 
 #ifndef PROCESS_HPP
 #define PROCESS_HPP

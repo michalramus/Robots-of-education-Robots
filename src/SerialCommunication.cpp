@@ -3,14 +3,14 @@
 #include "SerialCommunication.hpp"
 #include "Exceptions.hpp"
 //TODO: add default value
-void SerialCommunication::setBaudRate(int baudRate)
+void SerialCommunication::setBaudRate(uint16_t baudRate)
 {
     Serial.begin(baudRate); //Start Serial
 }
 
 String SerialCommunication::readMessage() //read values from Serial
 {
-    const int waitingTime = 2000; //time after that message will be considered as invalid
+    const uint16_t WAITING_TIME = 2000; //time after that message will be considered as invalid
     bool timerStarted = false; //check if timer start
     unsigned long int timer = 0; //time since last message character was received
     
@@ -33,7 +33,7 @@ String SerialCommunication::readMessage() //read values from Serial
             }
         }
 
-        if ((true == timerStarted) && (timer + waitingTime < millis())) //check if last message's character was received longer than 2 seconds
+        if ((true == timerStarted) && (timer + WAITING_TIME < millis())) //check if last message's character was received longer than 2 seconds
         {
             Exceptions::addReceivedMessage(message);
             //TODO: add exception

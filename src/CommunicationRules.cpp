@@ -1,25 +1,25 @@
 #include "CommunicationRules.hpp"
 #include <WString.h>
 
-const String CommSymbol::symbols[] = {
+const String CommSymbol::SYMBOLS[] = {
                                         "x",
                                         "type", "error", "config", "information", "task"}; //table with symbols
 
-String CommSymbol::getSymbol(int ID)
+String CommSymbol::getSymbol(uint16_t ID)
 {
-    return symbols[ID];
+    return SYMBOLS[ID];
 }
 
-int CommSymbol::getID(String symbol) //get ID of symbol
+uint16_t CommSymbol::getID(String symbol) //get ID of symbol
 {
     return CommSymbol::getID(symbol, 0);
 }
 
-int CommSymbol::getID(String symbol, int startID) //get ID of symbol Start search from specific ID
+uint16_t CommSymbol::getID(String symbol, uint16_t startID) //get ID of symbol Start search from specific ID
 {
     for (int i = startID; i < symbolsTabSize; i++) //iterate by table from startID
     {
-        if (CommSymbol::symbols[i] == symbol) //check symbol
+        if (CommSymbol::SYMBOLS[i] == symbol) //check symbol
         {
             return i;
         }

@@ -45,7 +45,7 @@ void Message::deserializeMessage(String message, JsonDocument &doc) //deserializ
     }
 }
 
-int Message::getMessageTypeID(JsonDocument &doc) //get ID of message type
+uint16_t Message::getMessageTypeID(JsonDocument &doc) //get ID of message type
 {
     String type = doc[CommSymbol::getSymbol(CommSymbolID::messageType)]; //get type of message
 

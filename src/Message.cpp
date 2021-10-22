@@ -1,5 +1,5 @@
 #include <ArduinoJson.h>
-#include "CommunicationRules.hpp"
+#include "Symbols/Symbols.hpp"
 
 #include "Message.hpp"
 
@@ -20,16 +20,16 @@ void Message::setJsonMessage(String message) //add convert Json message to Messa
 
     switch (messageType) //check message type
     {
-    case CommSymbolID::msgTypeError:
+    case SymbolsIDs::msgTypeError:
         /* code */
         break;
-    case CommSymbolID::msgTypeConfig:
+    case SymbolsIDs::msgTypeConfig:
         setupConfigMsg(doc);
         break;
-    case CommSymbolID::msgTypeInfo:
+    case SymbolsIDs::msgTypeInfo:
         /* code */
         break;
-    case CommSymbolID::msgTypeTask:
+    case SymbolsIDs::msgTypeTask:
         /* code */
         break;
     }
@@ -47,9 +47,9 @@ void Message::deserializeMessage(String message, JsonDocument &doc) //deserializ
 
 uint16_t Message::getMessageTypeID(JsonDocument &doc) //get ID of message type
 {
-    String type = doc[CommSymbol::getSymbol(CommSymbolID::messageType)]; //get type of message
+    String type = doc[SymbolsBase::getSymbol(SymbolsIDs::messageType)]; //get type of message
 
-    return CommSymbol::getID(type, CommSymbolID::messageType); //set messageType variable to ID of symbol
+    return SymbolsBase::getID(type, SymbolsIDs::messageType); //set messageType variable to ID of symbol
 }
 
 void Message::setupConfigMsg(JsonDocument &doc)

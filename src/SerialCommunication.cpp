@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "CommunicationRules.hpp"
+#include "Symbols/Symbols.hpp"
 #include "SerialCommunication.hpp"
 #include "Exceptions.hpp"
 //TODO: add default value
@@ -26,7 +26,7 @@ String SerialCommunication::readMessage() //read values from Serial
 
             message += Serial.readString();
 
-            if (((String)message[0] == CommSymbol::getSymbol(CommSymbolID::startEndMessage)) && ((String)message[message.length() - 1] == CommSymbol::getSymbol(CommSymbolID::startEndMessage))) //check if message transfer is completed
+            if (((String)message[0] == SymbolsBase::getSymbol(SymbolsIDs::startEndMessage)) && ((String)message[message.length() - 1] == SymbolsBase::getSymbol(SymbolsIDs::startEndMessage))) //check if message transfer is completed
             {
                 messageReceived = true;
                 
@@ -52,7 +52,7 @@ String SerialCommunication::readMessage() //read values from Serial
 
 void SerialCommunication::sendMessage(String message)//send message
 {
-    message = CommSymbol::getSymbol(CommSymbolID::startEndMessage) + message + CommSymbol::getSymbol(CommSymbolID::startEndMessage); //add startEndMessage symbol at start and end of message
+    message = SymbolsBase::getSymbol(SymbolsIDs::startEndMessage) + message + SymbolsBase::getSymbol(SymbolsIDs::startEndMessage); //add startEndMessage symbol at start and end of message
 
     Exceptions::addSendedMessage(message); //add message to messages' index
     Serial.println(message);

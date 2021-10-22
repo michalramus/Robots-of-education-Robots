@@ -19,12 +19,12 @@ private:
 
      const static int JSON_BUFFER_SIZE = 30; //TODO: set buffer size
 
-    int messageType = NULL;
+    int messageType = -1;
 
         //config
     //car
     int* devTypes;
-    int numOfCar = NULL;
+    int numOfCar = -1;
 };
 
 

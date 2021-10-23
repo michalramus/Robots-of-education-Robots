@@ -4,10 +4,10 @@
 #include "Message.hpp"
 
 //TODO: update jsonDocument
-
+//TODO: check if config message was sended more than 2 times
 Message::~Message() //destructor
 {
-    delete devTypes;
+    delete[] devTypes;
 }
 
 void Message::setJsonMessage(String message) //add convert Json message to Message object
@@ -41,7 +41,7 @@ void Message::deserializeMessage(String message, JsonDocument &doc) //deserializ
 
     if (error == true) //check if deserialization is successfull 
     {
-        //TODO: throw exception
+        //TODO: throw exception(send an error)
     }
 }
 

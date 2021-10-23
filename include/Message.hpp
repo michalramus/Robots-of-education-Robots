@@ -22,9 +22,9 @@ private:
     uint16_t messageType = -1;
 
         //config
+        uint16_t *devTypes = nullptr;
     //car
-    uint16_t* devTypes;
-    uint16_t numOfCar = -1;
+    uint8_t numOfCar = -1;
 };
 
 

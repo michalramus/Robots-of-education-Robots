@@ -35,12 +35,10 @@ String SerialCommunication::readMessage() //read values from Serial
 
         if ((true == timerStarted) && (timer + WAITING_TIME < millis())) //check if last message's character was received longer than 2 seconds
         {
-            Exceptions::addReceivedMessage(message);
+            SerialCommunication::lastReceivedMessage = message;
             //TODO: add exception
         }
     }
-
-    Exceptions::addReceivedMessage(message); //add message to messages' index
 
     //remove "x" character from start and end of message
     message.remove(0);
@@ -54,7 +52,6 @@ void SerialCommunication::sendMessage(String message)//send message
 {
     message = SymbolsBase::getSymbol(SymbolsIDs::startEndMessage) + message + SymbolsBase::getSymbol(SymbolsIDs::startEndMessage); //add startEndMessage symbol at start and end of message
 
-    Exceptions::addSendedMessage(message); //add message to messages' index
     Serial.println(message);
     
 }

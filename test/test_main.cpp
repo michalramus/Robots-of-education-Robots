@@ -6,8 +6,6 @@
 
 #ifdef ARDUINO //check if tests are running on Arduino ...
 
-#include <Arduino.h>
-
 void setup()
 {
     UNITY_BEGIN();
@@ -17,10 +15,7 @@ void setup()
 
 void loop() //signalize tests' end on Arduino led
 {
-    digitalWrite(13, HIGH);
-    delay(100);
-    digitalWrite(13, LOW);
-    delay(500);
+    //empty
 }
 
 #else // ... or on emulator

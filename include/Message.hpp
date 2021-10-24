@@ -17,8 +17,6 @@ private:
 
     void setupConfigMsg(JsonDocument &doc); //setup message as config
 
-     const static int JSON_BUFFER_SIZE = 30; //TODO: set buffer size
-
     uint16_t messageType = -1;
 
         //config

@@ -1,7 +1,11 @@
-#include <Arduino.h>
 #include "Symbols/Symbols.hpp"
 #include "SerialCommunication.hpp"
 #include "Exceptions.hpp"
+
+#include <WString.h>
+#include <HardwareSerial.h>
+#include <Arduino.h> //TODO: change to library with millis()method
+
 //TODO: add default value
 void SerialCommunication::setBaudRate(uint16_t baudRate)
 {

@@ -1,4 +1,4 @@
-#include <Arduino.h>
+#include <WString.h>
 
 #pragma once
 class SerialCommunication

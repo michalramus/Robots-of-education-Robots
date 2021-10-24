@@ -1,4 +1,3 @@
-#include <WString.h>
 
 #pragma once
 

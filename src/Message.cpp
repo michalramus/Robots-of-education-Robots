@@ -1,7 +1,8 @@
-#include <ArduinoJson.h>
-#include "Symbols/Symbols.hpp"
 
+#include "Symbols/Symbols.hpp"
 #include "Message.hpp"
+
+#include <ArduinoJson.h>
 
 //TODO: update jsonDocument
 //TODO: check if config message was sended more than 2 times

@@ -2,8 +2,8 @@
 #include <unity.h>
 
 
-#ifndef TEST_COMMUNICATION_RULES_HPP
-#define TEST_COMMUNICATION_RULES_HPP
+#ifndef TEST_SYMBOLS_BASE_HPP
+#define TEST_SYMBOLS_BASE_HPP
 
 class test_SymbolsBase
 {

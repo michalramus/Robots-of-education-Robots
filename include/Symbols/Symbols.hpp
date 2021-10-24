@@ -1,2 +1,2 @@
-#include "SymbolsIDs.hpp"
-#include "SymbolsBase.hpp"
+#include "Symbols/SymbolsIDs.hpp"
+#include "Symbols/SymbolsBase.hpp"

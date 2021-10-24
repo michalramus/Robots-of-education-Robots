@@ -1,6 +1,6 @@
 
 #include "Symbols/Symbols.hpp"
-#include "Message.hpp"
+#include "Message/Message.hpp"
 
 #include <ArduinoJson.h>
 

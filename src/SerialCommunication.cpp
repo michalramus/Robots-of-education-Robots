@@ -54,22 +54,22 @@ Message &SerialCommunication::readMessage() //read values from Serial
     }
 
     //rewrite message to smaller table and remove "x" character from start and end of message
-    char Message[bigMessagePtr - (1 + (2 * SymbolsBase::getSymbol(SymbolsIDs::startEndMessage).length()))]; //bigMessagePtr has value 1 more bigger
-    uint16_t MessagePtr = 0; //first free place in Message variable
+    char smallMessage[bigMessagePtr - (1 + (2 * SymbolsBase::getSymbol(SymbolsIDs::startEndMessage).length()))]; //bigMessagePtr has value 1 more bigger
+    uint16_t smallMessagePtr = 0; //first free place in smallMessage variable
 
     //rewrite message to smaller table  
     for (uint16_t i = SymbolsBase::getSymbol(SymbolsIDs::startEndMessage).length(); i < bigMessagePtr - SymbolsBase::getSymbol(SymbolsIDs::startEndMessage).length(); i++)
     {
-        Message[MessagePtr] = bigMessage[i];
+        smallMessage[smallMessagePtr] = bigMessage[i];
 
-        MessagePtr++;//increase free place
+        smallMessagePtr++;//increase free place
     }
     
     delete[] bigMessage; //delete first table with message
 
-    SerialCommunication::lastReceivedMessage = Message;
+    SerialCommunication::lastReceivedMessage = smallMessage;
 
-    
+
 }
 
 void SerialCommunication::sendMessage(char message[]) //send message

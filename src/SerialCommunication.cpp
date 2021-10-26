@@ -1,6 +1,7 @@
 #include "Symbols/Symbols.hpp"
 #include "SerialCommunication.hpp"
 #include "Exceptions.hpp"
+#include "Message/Message.hpp"
 
 #include <WString.h>
 #include <HardwareSerial.h>
@@ -12,52 +13,70 @@ void SerialCommunication::setBaudRate(uint16_t baudRate)
     Serial.begin(baudRate); //Start Serial
 }
 
-String SerialCommunication::readMessage() //read values from Serial
+Message &SerialCommunication::readMessage() //read values from Serial
 {
+    delete[] SerialCommunication::lastReceivedMessage;  //delete last message
+    SerialCommunication::lastReceivedMessage = nullptr; //set pointer to null
+
     const uint16_t WAITING_TIME = 2000; //time after that message will be considered as invalid
-    bool timerStarted = false; //check if timer start
-    unsigned long int timer = 0; //time since last message character was received
-    
-    bool messageReceived = false; //was message completely received
-    String message = "";          //message from Serial
+    bool timerStarted = false;          //check if timer start
+    unsigned long int timer = 0;        //time since last message character was received
+
+    bool messageReceived = false;           //was message completely received
+    char bigMessage[SERIAL_RX_BUFFER_SIZE]; //char table (max message size)
+    uint16_t bigMessagePtr = 0;             //first free place in bigMessage variable
 
     while (messageReceived == false) //waiting for message
     {
-        if (Serial.available() == true)
+
+        if (Serial.available() > 0)
         {
-            timerStarted = true;//start timer 
-            timer = millis(); // set timer to actual time
+            timerStarted = true; //start timer
+            timer = millis();    // set timer to actual time
 
-            message += Serial.readString();
+            bigMessage[bigMessagePtr] = Serial.read();
+            bigMessagePtr++; //increase last free place
 
-            if (((String)message[0] == SymbolsBase::getSymbol(SymbolsIDs::startEndMessage)) && ((String)message[message.length() - 1] == SymbolsBase::getSymbol(SymbolsIDs::startEndMessage))) //check if message transfer is completed
+            if (bigMessagePtr > 1) //check if received message has more than 1 character
             {
-                messageReceived = true;
-                
+                if ((bigMessage[0] == (char)SymbolsBase::getSymbol(SymbolsIDs::startEndMessage)[0]) && (bigMessage[bigMessagePtr - 1] == (char)SymbolsBase::getSymbol(SymbolsIDs::startEndMessage)[0])) //check if message transfer is completed
+                {
+                    messageReceived = true;
+                }
             }
         }
 
         if ((true == timerStarted) && (timer + WAITING_TIME < millis())) //check if last message's character was received longer than 2 seconds
         {
-            SerialCommunication::lastReceivedMessage = message;
+            SerialCommunication::lastReceivedMessage = "Incorrect message";
             //TODO: add exception
         }
     }
 
-    //remove "x" character from start and end of message
-    message.remove(0);
-    message.remove(message.length() - 1);
+    //rewrite message to smaller table and remove "x" character from start and end of message
+    char Message[bigMessagePtr - (1 + (2 * SymbolsBase::getSymbol(SymbolsIDs::startEndMessage).length()))]; //bigMessagePtr has value 1 more bigger
+    uint16_t MessagePtr = 0; //first free place in Message variable
 
-    SerialCommunication::lastReceivedMessage = message;
-    return message;
+    //rewrite message to smaller table  
+    for (uint16_t i = SymbolsBase::getSymbol(SymbolsIDs::startEndMessage).length(); i < bigMessagePtr - SymbolsBase::getSymbol(SymbolsIDs::startEndMessage).length(); i++)
+    {
+        Message[MessagePtr] = bigMessage[i];
+
+        MessagePtr++;//increase free place
+    }
+    
+    delete[] bigMessage; //delete first table with message
+
+    SerialCommunication::lastReceivedMessage = Message;
+
+    
 }
 
-void SerialCommunication::sendMessage(String message)//send message
+void SerialCommunication::sendMessage(char message[]) //send message
 {
     message = SymbolsBase::getSymbol(SymbolsIDs::startEndMessage) + message + SymbolsBase::getSymbol(SymbolsIDs::startEndMessage); //add startEndMessage symbol at start and end of message
 
     Serial.println(message);
-    
 }
 
 void SerialCommunication::sendLastMessage() //send last message

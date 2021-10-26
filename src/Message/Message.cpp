@@ -11,7 +11,7 @@ Message::~Message() //destructor
     delete[] devTypes;
 }
 
-void Message::setJsonMessage(String message) //add convert Json message to Message object
+void Message::setJsonMessage(char *message) //add convert Json message to Message object
 {
     //create JsonDocument
     StaticJsonDocument<JSON_BUFFER_SIZE> doc;
@@ -36,7 +36,7 @@ void Message::setJsonMessage(String message) //add convert Json message to Messa
     }
 }
 
-void Message::deserializeMessage(String message, JsonDocument &doc) //deserialize message to JsonDocument
+void Message::deserializeMessage(char *message, JsonDocument &doc) //deserialize message to JsonDocument
 {
     DeserializationError error = deserializeJson(doc, message); //deserialize message
 

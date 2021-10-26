@@ -6,12 +6,13 @@
 class Message
 {
 public:
+    Message();
     ~Message(); //destructor
 
-    void setJsonMessage(String message); //add convert Json message to Message object
+    void setJsonMessage(char *message); //add convert Json message to Message object
 
 private:
-    void deserializeMessage(String message, JsonDocument &doc); //deserialize message to JsonDocument
+    void deserializeMessage(char *message, JsonDocument &doc); //deserialize message to JsonDocument
 
     uint16_t getMessageTypeID(JsonDocument &doc); //get message type ID
 

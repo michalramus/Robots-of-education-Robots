@@ -11,11 +11,13 @@ Message::~Message() //destructor
     delete[] devTypes;
 }
 
-void Message::setJsonMessage(char *message) //add convert Json message to Message object
+void Message::setJsonMessage(char *message) //add convert Json message to Message object !!!METHOD DELETE MESSAGE VARIABLE!!!
 {
     //create JsonDocument
     StaticJsonDocument<JSON_BUFFER_SIZE> doc;
     Message::deserializeMessage(message, doc);
+
+    delete[] message; 
 
     messageType = getMessageTypeID(doc); //set message type
 

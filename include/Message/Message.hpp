@@ -9,7 +9,7 @@ public:
     Message();
     ~Message(); //destructor
 
-    void setJsonMessage(char *message); //add convert Json message to Message object
+    void setJsonMessage(char *message); //add convert Json message to Message object !!!METHOD DELETE MESSAGE VARIABLE!!!
 
 private:
     void deserializeMessage(char *message, JsonDocument &doc); //deserialize message to JsonDocument

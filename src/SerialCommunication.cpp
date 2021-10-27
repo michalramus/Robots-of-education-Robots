@@ -54,7 +54,7 @@ Message &SerialCommunication::readMessage() //read values from Serial
     }
 
     //rewrite message to smaller table and remove "x" character from start and end of message
-    char smallMessage[bigMessagePtr - (1 + (2 * SymbolsBase::getSymbol(SymbolsIDs::startEndMessage).length()))]; //bigMessagePtr has value 1 more bigger
+    char smallMessage[bigMessagePtr - (1 + (2 * SymbolsBase::getSymbol(SymbolsIDs::startEndMessage).length()))]; // Table with the same size like message
     uint16_t smallMessagePtr = 0; //first free place in smallMessage variable
 
     //rewrite message to smaller table  
@@ -69,7 +69,10 @@ Message &SerialCommunication::readMessage() //read values from Serial
 
     SerialCommunication::lastReceivedMessage = smallMessage;
 
+    Message Msg; //create message object
+    Msg.setJsonMessage(smallMessage); //set message from Json
 
+    return Msg;
 }
 
 void SerialCommunication::sendMessage(char message[]) //send message

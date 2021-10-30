@@ -1,19 +1,28 @@
 #include <stdint.h>
 
-
 #pragma once
 
 class Device
 {
 public:
-   ~Device();
+    ~Device();
+
+    //getter and setter of devType variable
+    void setDevType(uint16_t devType);
+    uint16_t getDevType();
+
+    //getter and setter of ID variable
+    void setID(uint8_t ID);
+    uint8_t getID();
+
+    //getter and setter of table with pins
+    void setPins(uint8_t *pins);
+    uint8_t *getPins();
+
 
 private:
     uint16_t devType = -1; //type of device
     uint8_t ID = -1; //ID of device
 
     uint8_t *pins = nullptr; //table with pins
-    uint16_t *values[2]; //table with extra values to set 
-    //TODO: change to dictionary values table
-
 };

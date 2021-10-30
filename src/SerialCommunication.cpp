@@ -15,9 +15,6 @@ void SerialCommunication::setBaudRate(uint16_t baudRate)
 
 Message &SerialCommunication::readMessage() //read values from Serial
 {
-    delete[] SerialCommunication::lastReceivedMessage;  //delete last message
-    SerialCommunication::lastReceivedMessage = nullptr; //set pointer to null
-
     const uint16_t WAITING_TIME = 2000; //time after that message will be considered as invalid
     bool timerStarted = false;          //check if timer start
     unsigned long int timer = 0;        //time since last message character was received
@@ -48,7 +45,6 @@ Message &SerialCommunication::readMessage() //read values from Serial
 
         if ((true == timerStarted) && (timer + WAITING_TIME < millis())) //check if last message's character was received longer than 2 seconds
         {
-            SerialCommunication::lastReceivedMessage = "Incorrect message";
             //TODO: add exception
         }
     }
@@ -65,9 +61,8 @@ Message &SerialCommunication::readMessage() //read values from Serial
         smallMessagePtr++;//increase free place
     }
     
+    //TODO: don't delete bigMessage move it into class body and clean after use
     delete[] bigMessage; //delete first table with message
-
-    SerialCommunication::lastReceivedMessage = smallMessage;
 
     Message Msg; //create message object
     Msg.setJsonMessage(smallMessage); //set message from Json
@@ -75,17 +70,34 @@ Message &SerialCommunication::readMessage() //read values from Serial
     return Msg;
 }
 
-void SerialCommunication::sendMessage(char message[]) //send message
+void SerialCommunication::sendMessage(char *message, uint16_t messageLength) //send message
 {
-    message = SymbolsBase::getSymbol(SymbolsIDs::startEndMessage) + message + SymbolsBase::getSymbol(SymbolsIDs::startEndMessage); //add startEndMessage symbol at start and end of message
+    char messageWithStrEndMsgChar[messageLength + (2 * SymbolsBase::getSymbol(SymbolsIDs::startEndMessage).length())]; //create char table with size that includentartEndMessage character
+    uint16_t ptrMessage = 0; //pointer, that is set for the first free element in table
 
-    Serial.println(message);
+    uint8_t startEndMessageLength = SymbolsBase::getSymbol(SymbolsIDs::startEndMessage).length(); //get length of startEndMessage symbol
+
+    for (uint16_t i = 0; i < startEndMessageLength; i++) //add startEndMessage symbol at the begin of MessageWithStrMsgChar
+    {
+        messageWithStrEndMsgChar[ptrMessage]= SymbolsBase::getSymbol(SymbolsIDs::startEndMessage)[i];
+        ptrMessage++;
+    }
+    
+    for (size_t i = 0; i < messageLength; i++) //rewrite message to messageWithEndMshChar
+    {
+        messageWithStrEndMsgChar[ptrMessage] = message[i];
+        ptrMessage++;
+    }
+
+    for (uint16_t i = 0; i < startEndMessageLength; i++) //add startEndMessage symbol at the end of MessageWithStrMsgChar
+    {
+        messageWithStrEndMsgChar[ptrMessage] = SymbolsBase::getSymbol(SymbolsIDs::startEndMessage)[i];
+        ptrMessage++;
+    }
+
+    Serial.println(messageWithStrEndMsgChar); //send message
 }
 
-void SerialCommunication::sendLastMessage() //send last message
-{
-    SerialCommunication::sendMessage(lastReceivedMessage);
-}
 
 void SerialCommunication::sendMessageReceived() //send message, that last message was received
 {

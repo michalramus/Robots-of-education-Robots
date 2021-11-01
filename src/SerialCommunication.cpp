@@ -96,9 +96,10 @@ void SerialCommunication::sendMessage(char *message, uint16_t messageLength) //s
     }
 
     Serial.println(messageWithStrEndMsgChar); //send message
+    
 }
 
-void SerialCommunication::sendMessageReceived() //send message, that last message was received
+void SerialCommunication::sendSpecifiedMessage(uint16_t type) //send message, that last message was received
 {
     //TODO:
 }

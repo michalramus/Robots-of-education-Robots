@@ -16,7 +16,7 @@ public:
     uint8_t getID();
 
     //getter and setter of table with pins
-    void setPins(uint8_t *pins);
+    void setPins(uint8_t *pins); //!!METHOD DELETE TABLE DURING DESTRUCTION!!
     uint8_t *getPinsPtr();
 
 

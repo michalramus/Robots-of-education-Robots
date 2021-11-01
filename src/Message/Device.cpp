@@ -1,6 +1,5 @@
 #include "Message/Device.hpp"
 
-
 Device::~Device() //destructor
 {
     if (pins == nullptr) //delete pins table
@@ -18,9 +17,15 @@ void Device::setDevType(uint16_t devType)
 
 uint16_t Device::getDevType()
 {
-    return devType;
+    if (devType != -1)
+    {
+        return devType;
+    }
+    else
+    {
+        //TODO: throw exception
+    }
 }
-
 
 //getter and setter of ID variable
 void Device::setID(uint8_t ID)
@@ -30,9 +35,15 @@ void Device::setID(uint8_t ID)
 
 uint8_t Device::getID()
 {
-    return ID;
+    if (ID != -1)
+    {
+        return ID;
+    }
+    else
+    {
+        //TODO: throw exception
+    }
 }
-
 
 //getter and setter of table with pins
 void Device::setPins(uint8_t *pins)
@@ -42,5 +53,12 @@ void Device::setPins(uint8_t *pins)
 
 uint8_t *Device::getPinsPtr()
 {
-    return pins;
+    if (pins != nullptr)
+    {
+        return pins;
+    }
+    else
+    {
+        //TODO: throw exception
+    }
 }

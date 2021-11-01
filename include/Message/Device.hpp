@@ -17,7 +17,7 @@ public:
 
     //getter and setter of table with pins
     void setPins(uint8_t *pins);
-    uint8_t *getPins();
+    uint8_t *getPinsPtr();
 
 
 private:

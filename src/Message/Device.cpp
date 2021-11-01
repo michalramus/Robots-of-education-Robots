@@ -40,7 +40,7 @@ void Device::setPins(uint8_t *pins)
     this->pins = pins;
 }
 
-uint8_t *Device::getPins()
+uint8_t *Device::getPinsPtr()
 {
     return pins;
 }

@@ -3,9 +3,8 @@
 #include "Exceptions.hpp"
 #include "Message/Message.hpp"
 
-#include <WString.h>
-#include <HardwareSerial.h>
-#include <Arduino.h> //TODO: change to library with millis()method
+#include <ArduinoJson.h>
+#include <Arduino.h> 
 
 //TODO: add default value
 void SerialCommunication::setBaudRate(uint16_t baudRate)
@@ -71,6 +70,18 @@ Message &SerialCommunication::readMessage() //read values from Serial
     return Msg;
 }
 
+void SerialCommunication::sendMessage(Message message) //send message
+{
+    char *MsgToSend = message.getCharMessage(); //get message converted to char array
+    
+    sendMessage(MsgToSend, message.getCharMessageLength()); //send message
+}
+
+void SerialCommunication::sendSpecifiedMessage(int16_t type) //send message, that last message was received
+{
+    //TODO:
+}
+
 void SerialCommunication::sendMessage(char *message, uint16_t messageLength) //send message
 {
     char messageWithStrEndMsgChar[messageLength + (2 * SymbolsBase::getSymbol(SymbolsIDs::startEndMessage).length())]; //create char table with size that includentartEndMessage character
@@ -100,7 +111,3 @@ void SerialCommunication::sendMessage(char *message, uint16_t messageLength) //s
     
 }
 
-void SerialCommunication::sendSpecifiedMessage(int16_t type) //send message, that last message was received
-{
-    //TODO:
-}

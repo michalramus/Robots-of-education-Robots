@@ -39,6 +39,23 @@ void Message::setMessageByJson(char *message) //add convert Json message to Mess
     }
 }
 
+char *Message::getCharMessage() //get message converted to char array
+{
+    //TODO: remember to set charMessageLength variable
+}
+
+int16_t Message::getCharMessageLength() //get length of char array with message after serialization
+{
+    if (charMessageLength != -1)
+    {
+        return charMessageLength;
+    }
+    else
+    {
+        //TODO: throw exception
+    }
+}
+
 void Message::deserializeMessage(char *message, JsonDocument &doc) //deserialize message to JsonDocument
 {
     DeserializationError error = deserializeJson(doc, message); //deserialize message

@@ -7,17 +7,17 @@ const String SymbolsBase::SYMBOLS[] = {
     "x",
     "type", "error", "config", "information", "task"}; //table with symbols
 
-String SymbolsBase::getSymbol(uint16_t ID)
+String SymbolsBase::getSymbol(int16_t ID)
 {
     return SYMBOLS[ID];
 }
 
-uint16_t SymbolsBase::getID(String symbol) //get ID of symbol
+int16_t SymbolsBase::getID(String symbol) //get ID of symbol
 {
     return SymbolsBase::getID(symbol, 0);
 }
 
-uint16_t SymbolsBase::getID(String symbol, uint16_t startID) //get ID of symbol Start search from specific ID
+int16_t SymbolsBase::getID(String symbol, int16_t startID) //get ID of symbol Start search from specific ID
 {
     for (int i = startID; i < symbolsTabSize; i++) //iterate by table from startID
     {

@@ -11,13 +11,14 @@ Message::~Message() //destructor
     delete[] devTypes;
 }
 
-void Message::setJsonMessage(char *message) //add convert Json message to Message object !!!METHOD DELETE MESSAGE VARIABLE!!!
+void Message::setMessageByJson(char *message) //add convert Json message to Message object !!!METHOD DELETE MESSAGE VARIABLE!!!
 {
+    //TODO: different JsonBufferSize after config
     //create JsonDocument
     StaticJsonDocument<JSON_BUFFER_SIZE> doc;
     Message::deserializeMessage(message, doc);
 
-    delete[] message; 
+    delete[] message;
 
     messageType = getMessageTypeID(doc); //set message type
 
@@ -42,13 +43,13 @@ void Message::deserializeMessage(char *message, JsonDocument &doc) //deserialize
 {
     DeserializationError error = deserializeJson(doc, message); //deserialize message
 
-    if (error == true) //check if deserialization is successfull 
+    if (error == true) //check if deserialization is successfull
     {
         //TODO: throw exception(send an error)
     }
 }
 
-uint16_t Message::getMessageTypeID(JsonDocument &doc) //get ID of message type
+int16_t Message::getMessageTypeID(JsonDocument &doc) //get ID of message type
 {
     String type = doc[SymbolsBase::getSymbol(SymbolsIDs::messageType)]; //get type of message
 
@@ -57,5 +58,4 @@ uint16_t Message::getMessageTypeID(JsonDocument &doc) //get ID of message type
 
 void Message::setupConfigMsg(JsonDocument &doc)
 {
-
 }

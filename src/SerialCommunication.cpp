@@ -20,6 +20,7 @@ Message &SerialCommunication::readMessage() //read values from Serial
     unsigned long int timer = 0;        //time since last message character was received
 
     bool messageReceived = false;           //was message completely received
+    //TODO: different size after config
     char bigMessage[SERIAL_RX_BUFFER_SIZE]; //char table (max message size)
     uint16_t bigMessagePtr = 0;             //first free place in bigMessage variable
 
@@ -65,7 +66,7 @@ Message &SerialCommunication::readMessage() //read values from Serial
     delete[] bigMessage; //delete first table with message
 
     Message Msg;                      //create message object
-    Msg.setJsonMessage(smallMessage); //set message from Json
+    Msg.setMessageByJson(smallMessage); //set message from Json
 
     return Msg;
 }
@@ -99,7 +100,7 @@ void SerialCommunication::sendMessage(char *message, uint16_t messageLength) //s
     
 }
 
-void SerialCommunication::sendSpecifiedMessage(uint16_t type) //send message, that last message was received
+void SerialCommunication::sendSpecifiedMessage(int16_t type) //send message, that last message was received
 {
     //TODO:
 }

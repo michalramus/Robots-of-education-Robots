@@ -10,12 +10,12 @@ Device::~Device() //destructor
 }
 
 //getter and setter of devType variable
-void Device::setDevType(uint16_t devType)
+void Device::setDevType(int16_t devType)
 {
     this->devType = devType;
 }
 
-uint16_t Device::getDevType()
+int16_t Device::getDevType()
 {
     if (devType != -1)
     {
@@ -28,12 +28,12 @@ uint16_t Device::getDevType()
 }
 
 //getter and setter of ID variable
-void Device::setID(uint8_t ID)
+void Device::setID(int8_t ID)
 {
     this->ID = ID;
 }
 
-uint8_t Device::getID()
+int8_t Device::getID()
 {
     if (ID != -1)
     {

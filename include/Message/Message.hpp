@@ -6,7 +6,6 @@
 class Message
 {
 public:
-    Message();
     ~Message(); //destructor
 
     void setMessageByJson(char *message); //add convert Json message to Message object !!!METHOD DELETE MESSAGE VARIABLE!!!

@@ -28,6 +28,7 @@ Message &SerialCommunication::readMessage() //read values from Serial
     while (messageReceived == false) //waiting for message
     {
 
+//TODO: USE TIMER INTERRUPT INSTEAD MILLIS()
         while (Serial.available() > 0) //receive message
         {
             timerStarted = true; //start timer
@@ -63,7 +64,6 @@ Message &SerialCommunication::readMessage() //read values from Serial
         smallMessagePtr++; //increase free place
     }
 
-    //TODO: don't delete bigMessage move it into class body and clean after use
     delete[] bigMessage; //delete first table with message
 
     Message msg;                      //create message object

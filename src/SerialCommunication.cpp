@@ -64,10 +64,10 @@ Message &SerialCommunication::readMessage() //read values from Serial
     //TODO: don't delete bigMessage move it into class body and clean after use
     delete[] bigMessage; //delete first table with message
 
-    Message Msg;                      //create message object
-    Msg.setMessageByJson(smallMessage); //set message from Json
+    Message msg;                      //create message object
+    msg.setMessageByJson(smallMessage); //set message from Json
 
-    return Msg;
+    return msg;
 }
 
 void SerialCommunication::sendMessage(Message message) //send message

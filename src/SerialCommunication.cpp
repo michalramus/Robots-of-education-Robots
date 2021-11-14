@@ -4,7 +4,9 @@
 #include "Message/Message.hpp"
 
 #include <ArduinoJson.h>
-#include <Arduino.h> 
+#include <WString.h>
+#include <HardwareSerial.h>
+#include <Arduino.h> //TODO: change to library with millis()method
 
 //TODO: add default value
 void SerialCommunication::setBaudRate(uint16_t baudRate)
@@ -68,6 +70,18 @@ Message &SerialCommunication::readMessage() //read values from Serial
     msg.setMessageByJson(smallMessage); //set message from Json
 
     return msg;
+}
+
+void SerialCommunication::sendMessage(Message message) //send message
+{
+    char *MsgToSend = message.getCharMessage(); //get message converted to char array
+    
+    sendMessage(MsgToSend, message.getCharMessageLength()); //send message
+}
+
+void SerialCommunication::sendSpecifiedMessage(int16_t type) //send message, that last message was received
+{
+    //TODO:
 }
 
 void SerialCommunication::sendMessage(Message message) //send message

@@ -2,7 +2,7 @@
 
 Device::~Device() //destructor
 {
-    if (pins == nullptr) //delete pins table
+    if (pins != nullptr) //delete pins table
     {
         delete[] pins;
         pins = nullptr;

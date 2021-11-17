@@ -15,6 +15,9 @@ public:
     char *getCharMessage();         //get message converted to char array
     int16_t getCharMessageLength(); //get length of char array with message after serialization
 
+    //config
+    int8_t getDevTypesLength(); //MSG TYPE: CONFIG get length of array with device types
+
 private:
     void deserializeMessage(char *message, JsonDocument &doc); //deserialize message to JsonDocument
 

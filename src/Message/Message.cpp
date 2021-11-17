@@ -66,6 +66,18 @@ int16_t Message::getCharMessageLength() //get length of char array with message 
     }
 }
 
+int8_t Message::getDevTypesLength() //CONFIG get length of array with device types
+{
+    if (Message::devTypesLength != -1)
+    {
+        return Message::devTypesLength;
+    }
+    else
+    {
+        //TODO: throw exception
+    }
+}
+
 void Message::deserializeMessage(char *message, JsonDocument &doc) //deserialize message to JsonDocument
 {
     DeserializationError error = deserializeJson(doc, message); //deserialize message

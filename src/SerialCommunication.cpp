@@ -84,18 +84,6 @@ void SerialCommunication::sendSpecifiedMessage(int16_t type) //send message, tha
     //TODO:
 }
 
-void SerialCommunication::sendMessage(Message message) //send message
-{
-    char *MsgToSend = message.getCharMessage(); //get message converted to char array
-    
-    sendMessage(MsgToSend, message.getCharMessageLength()); //send message
-}
-
-void SerialCommunication::sendSpecifiedMessage(int16_t type) //send message, that last message was received
-{
-    //TODO:
-}
-
 void SerialCommunication::sendMessage(char *message, uint16_t messageLength) //send message
 {
     char messageWithStrEndMsgChar[messageLength + (2 * SymbolsBase::getSymbol(SymbolsIDs::startEndMessage).length())]; //create char table with size that includentartEndMessage character

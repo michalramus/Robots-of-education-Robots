@@ -1,6 +1,7 @@
 
 #include "Symbols/Symbols.hpp"
 #include "Message/Message.hpp"
+#include "Message/Device.hpp"
 
 #include <ArduinoJson.h>
 
@@ -82,7 +83,7 @@ void Message::deserializeMessage(char *message, JsonDocument &doc) //deserialize
 {
     DeserializationError error = deserializeJson(doc, message); //deserialize message
 
-    if (error == true) //check if deserialization is successfull
+    if (error == true) //check if deserialization was successful
     {
         //TODO: throw exception(send an error)
     }
@@ -90,11 +91,55 @@ void Message::deserializeMessage(char *message, JsonDocument &doc) //deserialize
 
 int16_t Message::getMessageTypeID(JsonDocument &doc) //get ID of message type
 {
-    String type = doc[SymbolsBase::getSymbol(SymbolsIDs::messageType)]; //get type of message
+    String type = doc[SymbolsBase::getSymbol(SymbolsIDs::messageType)]; 
 
-    return SymbolsBase::getID(type, SymbolsIDs::messageType); //set messageType variable to ID of symbol
+    return SymbolsBase::getID(type, SymbolsIDs::messageType); 
 }
 
-void Message::setupConfigMsg(JsonDocument &doc)
+void Message::setupConfigMsg(JsonDocument &doc) //setup Message as config
 {
+    devTypesLength = doc[SymbolsBase::getSymbol(SymbolsIDs::msgConfDeviceTypes)].size(); //get length of device types array
+
+    //create array of device types
+    *devTypes = new uint16_t[devTypesLength];
+
+    for (int16_t i = 0; i < devTypesLength; i++)
+    {
+        devTypes[i] = new uint16_t[2];
+    }
+
+
+    for (int16_t i = 0; i < devTypesLength; i++) //write available devices' IDs to devTypes array
+    {
+        devTypes[i][0] = SymbolsBase::getID(doc[SymbolsBase::getSymbol(SymbolsIDs::msgConfDeviceTypes)][i]); //write device ID
+        devTypes[i][1] = doc[SymbolsBase::getSymbol(devTypes[i][0])]; //write number of devices
+    }
+
+
+    Dev = new Device[devTypesLength]; //create array of devices
+    
+    uint8_t freeDevPtr = 0; //pointer to free device in array of devices
+
+    for (uint8_t i = 0; i < devTypesLength; i++)// set Devices
+    {
+        uint16_t devType = devTypes[i][0]; 
+        
+        for (uint8_t j = 0; j < devTypes[i][1]; j++)
+        {
+            //BUG: test this line and optimize
+            Dev[freeDevPtr].setDevType(doc[SymbolsBase::getSymbol(devType) + i][SymbolsBase::getSymbol(SymbolsIDs::deviceID)]); //set ID
+            Dev[freeDevPtr].setDevType(devType); //set Type
+
+            uint8_t pinsLength = doc[SymbolsBase::getSymbol(devType) + i][SymbolsBase::getSymbol(SymbolsIDs::pinsArray)].size(); //get size of pins array
+            uint8_t pins[pinsLength];
+
+            for (uint8_t k = 0; k < pinsLength; k++) //set pins array
+            {
+                pins[k] = doc[SymbolsBase::getSymbol(devType) + i][SymbolsBase::getSymbol(SymbolsIDs::pinsArray)][k];
+            }
+
+            Dev[freeDevPtr].setPins(pins); //set pins array in Device
+            freeDevPtr++;
+        }
+    }
 }

@@ -3,9 +3,16 @@
 
 #include <WString.h>
 
+//TODO: optimize SYMBOLS
 const String SymbolsBase::SYMBOLS[] = {
     "x",
-    "type", "error", "config", "information", "task"}; //table with symbols
+
+    "type",
+    "error",
+    "config", "devTypes",
+    "information",
+    "task",
+    "ID", "pins"}; //table with symbols
 
 String SymbolsBase::getSymbol(int16_t ID)
 {
@@ -21,7 +28,7 @@ int16_t SymbolsBase::getID(String symbol, int16_t startID) //get ID of symbol St
 {
     for (int i = startID; i < symbolsTabSize; i++) //iterate by table from startID
     {
-        if  (SymbolsBase::SYMBOLS[i] == symbol) //check symbol
+        if (SymbolsBase::SYMBOLS[i] == symbol) //check symbol
         {
             return i;
         }

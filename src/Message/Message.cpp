@@ -8,7 +8,17 @@
 //TODO: check if config message was sended more than 2 times
 Message::~Message() //destructor
 {
-    delete[] devTypes;
+    if (devTypes != nullptr) //delete devTypes array if exist
+    {
+        for (int8_t i = 0; i < devTypesLength; i++)
+        {
+            delete devTypes[i];
+            devTypes[i] = nullptr;
+        }
+
+        delete devTypes;
+        devTypes = nullptr;
+    }
 }
 
 void Message::setMessageByJson(char *message) //add convert Json message to Message object !!!METHOD DELETE MESSAGE VARIABLE!!!

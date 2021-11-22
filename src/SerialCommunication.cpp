@@ -14,7 +14,7 @@ void SerialCommunication::setBaudRate(uint16_t baudRate)
     Serial.begin(baudRate); //Start Serial
 }
 
-Message &SerialCommunication::readMessage() //read values from Serial
+IMessage SerialCommunication::readMessage(IMessage messageClass) //read values from Serial
 {
     const uint16_t WAITING_TIME = 2000; //time after that message will be considered as invalid
     bool timerStarted = false;          //check if timer start
@@ -66,13 +66,12 @@ Message &SerialCommunication::readMessage() //read values from Serial
 
     delete[] bigMessage; //delete first table with message
 
-    Message msg;                      //create message object
-    msg.setMessageByJson(smallMessage); //set message from Json
+    messageClass.setMessageByJson(smallMessage); //set message from Json
 
-    return msg;
+    return messageClass;
 }
 
-void SerialCommunication::sendMessage(Message message) //send message
+void SerialCommunication::sendMessage(IMessage message) //send message
 {
     char *MsgToSend = message.getCharMessage(); //get message converted to char array
     

@@ -22,6 +22,12 @@ Message::~Message() //destructor
         devTypes = nullptr;
     }
 
+    if (Dev != nullptr) //delete Dev array if exists
+    {
+        delete Dev;
+        Dev = nullptr;
+    }
+
     if (tasks != nullptr) //delete tasks array if exists
     {
         delete tasks;
@@ -56,6 +62,8 @@ void Message::setMessageByJson(char *message) //add convert Json message to Mess
         setupTaskMsg(doc);
         break;
     }
+
+    doc.clear(); //clear JsonDocument buffer
 }
 
 char *Message::getCharMessage() //get message converted to char array
@@ -63,7 +71,7 @@ char *Message::getCharMessage() //get message converted to char array
     //TODO: remember to set charMessageLength variable
 }
 
-int16_t Message::getCharMessageLength() //get length of char array with message after serialization
+int16_t Message::getCharMessageLength() //get length of char array with message after serialization FIRST CALL getCharMessage METHOD
 {
     if (charMessageLength != -1)
     {

@@ -1,12 +1,13 @@
 #include "Message/Device.hpp"
 #include "Message/Task.hpp"
+#include "Interfaces/IMessage.hpp"
 
 #include <WString.h>
 #include <ArduinoJson.h>
 
 #pragma once
 
-class Message
+class Message : public IMessage
 {
 public:
     ~Message(); //destructor

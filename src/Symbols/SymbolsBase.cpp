@@ -11,7 +11,7 @@ const String SymbolsBase::SYMBOLS[] = {
     "error",
     "config", "devTypes",
     "information",
-    "task",
+    "task", "taskNum", "devType", "taskType", "valNum", "value",
     "ID", "pins"}; //table with symbols
 
 String SymbolsBase::getSymbol(int16_t ID)

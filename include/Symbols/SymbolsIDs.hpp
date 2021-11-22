@@ -15,6 +15,11 @@ enum SymbolsIDs //id of communication symbols
     msgTypeInfo, //info message
 
     msgTypeTask, //task message
+    msgTaskTaskNumber,
+    msgTaskDeviceType,
+    msgTaskTaskType,
+    msgTaskExtraValNum,
+    msgTaskExtraVal,
 
     //devices
     deviceID,

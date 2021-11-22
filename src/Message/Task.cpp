@@ -11,46 +11,10 @@ Task::~Task()
         {
             delete extraValues[i];
         }
-        
+
         delete extraValues;
         extraValues = nullptr;
     }
-}
-
-//getter and setter of device type
-int16_t Task::getDevType()
-{
-    if (devType != -1)
-    {
-        return devType;
-    }
-    else
-    {
-        //TODO: throw exception
-    }
-}
-
-void Task::setDevType(int16_t devType)
-{
-    this->devType = devType;
-}
-
-//getter and setter of ID
-int8_t Task::getID()
-{
-    if (ID != -1)
-    {
-        return ID;
-    }
-    else
-    {
-        //TODO: throw exception
-    }
-}
-
-void Task::setID(int8_t)
-{
-    this->ID = ID;
 }
 
 //getter and setter of task

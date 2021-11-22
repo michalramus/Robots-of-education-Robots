@@ -1,19 +1,13 @@
+#include "Message/VMsgContainer.hpp"
+
 #include <stdint.h>
 
 #pragma once 
 
-class Task
+class Task : public VMsgContainer
 {
 public:
     ~Task();
-
-    //getter and setter of devType
-    int16_t getDevType();
-    void setDevType(int16_t devType);
-
-    //getter and setter of ID
-    int8_t getID();
-    void setID(int8_t ID);
 
     //getter and setter of task
     int16_t getTask();
@@ -29,9 +23,6 @@ public:
 
 private:
     //variables
-    int16_t devType = -1;
-    int8_t ID = -1;
-
     int16_t task = -1;
 
     //extra values

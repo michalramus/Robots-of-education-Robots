@@ -2,6 +2,7 @@
 #include "Symbols/Symbols.hpp"
 #include "Message/Message.hpp"
 #include "Message/Device.hpp"
+#include "Message/Task.hpp"
 
 #include <ArduinoJson.h>
 
@@ -9,7 +10,7 @@
 //TODO: check if config message was sended more than 2 times
 Message::~Message() //destructor
 {
-    if (devTypes != nullptr) //delete devTypes array if exist
+    if (devTypes != nullptr) //delete devTypes array if exists
     {
         for (int8_t i = 0; i < devTypesLength; i++)
         {
@@ -20,6 +21,13 @@ Message::~Message() //destructor
         delete devTypes;
         devTypes = nullptr;
     }
+
+    if (tasks != nullptr) //delete tasks array if exists
+    {
+        delete tasks;
+        tasks = nullptr;
+    }
+    
 }
 
 void Message::setMessageByJson(char *message) //add convert Json message to Message object !!!METHOD DELETE MESSAGE VARIABLE!!!
@@ -36,16 +44,16 @@ void Message::setMessageByJson(char *message) //add convert Json message to Mess
     switch (messageType) //check message type
     {
     case SymbolsIDs::msgTypeError:
-        /* code */
+        //TODO: add setup error message
         break;
     case SymbolsIDs::msgTypeConfig:
         setupConfigMsg(doc);
         break;
     case SymbolsIDs::msgTypeInfo:
-        /* code */
+        //TODO: add setup for info message
         break;
     case SymbolsIDs::msgTypeTask:
-        /* code */
+        setupTaskMsg(doc);
         break;
     }
 }
@@ -140,6 +148,27 @@ void Message::setupConfigMsg(JsonDocument &doc) //setup Message as config
 
             Dev[freeDevPtr].setPins(pins); //set pins array in Device
             freeDevPtr++;
+        }
+    }
+}
+
+void Message::setupTaskMsg(JsonDocument &doc) //setup Message as task
+{
+    taskLength = doc[SymbolsBase::getSymbol(SymbolsIDs::msgTaskTaskNumber)]; //get length of tasks array
+    tasks = new Task[taskLength]; //create array of tasks
+
+    for (int i = 0; i < taskLength; i++) //set tasks
+    {
+        tasks[i].setDevType(doc[SymbolsBase::getSymbol(SymbolsIDs::msgTypeTask) + i][SymbolsBase::getSymbol(SymbolsIDs::msgTaskDeviceType)]); //set device type
+        tasks[i].setID(doc[SymbolsBase::getSymbol(SymbolsIDs::msgTypeTask) + i][SymbolsBase::getSymbol(SymbolsIDs::deviceID)]); //set device ID
+        tasks[i].setTask(doc[SymbolsBase::getSymbol(SymbolsIDs::msgTypeTask) + i][SymbolsBase::getSymbol(SymbolsIDs::msgTaskTaskType)]); //set Task
+
+        //set extra values
+        tasks[i].setExtraValuesSize(doc[SymbolsBase::getSymbol(SymbolsIDs::msgTypeTask) + i][SymbolsBase::getSymbol(SymbolsIDs::msgTaskExtraValNum)]); //set size of extra values array
+
+        for (int j = 0; j < tasks[i].getExtraValuesSize(); j++) //set extra values
+        {
+            tasks[i].setExtraValue(doc[SymbolsBase::getSymbol(SymbolsIDs::msgTypeTask) + i][SymbolsBase::getSymbol(SymbolsIDs::msgTaskExtraVal) + j][0], doc[SymbolsBase::getSymbol(SymbolsIDs::msgTypeTask) + i][SymbolsBase::getSymbol(SymbolsIDs::msgTaskExtraVal) + j][1]); //set extra values
         }
     }
 }

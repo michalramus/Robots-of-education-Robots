@@ -1,4 +1,5 @@
 #include "Message/Device.hpp"
+#include "Message/Task.hpp"
 
 #include <WString.h>
 #include <ArduinoJson.h>
@@ -24,6 +25,7 @@ private:
     int16_t getMessageTypeID(JsonDocument &doc); //get message type ID
 
     void setupConfigMsg(JsonDocument &doc); //setup message as config
+    void setupTaskMsg(JsonDocument &doc);   //setup message as task
 
     //variables
     int16_t charMessageLength = -1; //variable that stores length of char array with message
@@ -34,4 +36,8 @@ private:
     int8_t devTypesLength = -1;    //length of array with device types
 
     Device *Dev = nullptr; //array with devices
+
+    //task
+    int8_t taskLength = 0; //size of task array
+    Task *tasks = nullptr; //array with tasks
 };

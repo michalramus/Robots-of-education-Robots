@@ -1,6 +1,7 @@
 #include "Symbols/Symbols.hpp"
 #include "SerialCommunication.hpp"
 #include "Interfaces/IMessage.hpp"
+#include "Exceptions/Exceptions.hpp"
 
 
 #include <ArduinoJson.h>

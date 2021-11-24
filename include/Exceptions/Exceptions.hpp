@@ -1,4 +1,4 @@
-#include <Interfaces/IMessage.hpp>
+#include "Interfaces/IMessage.hpp"
 
 #include <stdint.h>
 
@@ -17,3 +17,6 @@ private:
     static void (*_sendMessage)(IMessage); //communication interface
 
 };
+
+
+#include "Exceptions/ExceptionsBase.hpp"

@@ -18,5 +18,5 @@ public:
 private:
     static void sendMessage(char *message, uint16_t messageLength); //send message
     static HardwareSerial *_serial;
-    static void (*throwException)(IMessage message);
+    static void (*_throwException)(IMessage message);
 };

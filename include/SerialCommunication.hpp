@@ -1,4 +1,3 @@
-#include "Message/Message.hpp"
 #include "Interfaces/IMessage.hpp"
 
 #include <WString.h>

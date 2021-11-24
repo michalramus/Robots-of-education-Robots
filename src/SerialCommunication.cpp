@@ -1,7 +1,7 @@
 #include "Symbols/Symbols.hpp"
 #include "SerialCommunication.hpp"
-#include "Exceptions.hpp"
-#include "Message/Message.hpp"
+#include "Interfaces/IMessage.hpp"
+
 
 #include <ArduinoJson.h>
 #include <WString.h>

@@ -16,11 +16,21 @@ void SerialCommunication::confSerialCommunication(HardwareSerial *serial, uint16
     _serial->begin(baudRate);
 
     //setup error method
-    throwException = exceptionMethod;
+    _throwException = exceptionMethod;
 }
 
 IMessage SerialCommunication::readMessage(IMessage messageClass) //read values from Serial
 {
+    if(!_serial) //check if serial was set
+    {
+        _serial = &Serial;
+    }
+
+    if(!_throwException) //check if error method was set
+    {
+        _throwException = &Exceptions::throwException;
+    }
+
     const uint16_t WAITING_TIME = 2000; //time after that message will be considered as invalid
     bool timerStarted = false;          //check if timer start
     unsigned long int timer = 0;        //time since last message character was received
@@ -90,6 +100,11 @@ void SerialCommunication::sendSpecifiedMessage(int16_t type) //send message, tha
 
 void SerialCommunication::sendMessage(char *message, uint16_t messageLength) //send message
 {
+    if(!_serial) //check if serial class was set
+    {
+        _serial = &Serial;
+    }
+
     char messageWithStrEndMsgChar[messageLength + (2 * SymbolsBase::getSymbol(SymbolsIDs::startEndMessage).length())]; //create char table with size that includentartEndMessage character
     uint16_t ptrMessage = 0;                                                                                           //pointer, that is set for the first free element in table
 

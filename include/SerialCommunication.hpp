@@ -1,4 +1,5 @@
 #include "Interfaces/IMessage.hpp"
+#include <HardwareSerial.h>
 
 #include <WString.h>
 
@@ -6,7 +7,7 @@
 class SerialCommunication
 {
 public:
-    static void setBaudRate(uint16_t baudRate);
+    static void confSerialCommunication(HardwareSerial *serial, uint16_t baudRate, void (*exceptionMethod)(IMessage));
 
     static IMessage readMessage(IMessage messageClass); //receive message from Serial
     
@@ -16,4 +17,6 @@ public:
 
 private:
     static void sendMessage(char *message, uint16_t messageLength); //send message
+    static HardwareSerial *_serial;
+    static void (*throwException)(IMessage message);
 };

@@ -8,10 +8,14 @@
 #include <HardwareSerial.h>
 #include <Arduino.h> //TODO: change to library with millis()method
 
-//TODO: add default value
-void SerialCommunication::setBaudRate(uint16_t baudRate)
+void SerialCommunication::confSerialCommunication(HardwareSerial *serial, uint16_t baudRate, void (*exceptionMethod)(IMessage))
 {
-    Serial.begin(baudRate); //Start Serial
+    //setup serial
+    _serial = serial;
+    _serial->begin(baudRate);
+
+    //setup error method
+    throwException = exceptionMethod;
 }
 
 IMessage SerialCommunication::readMessage(IMessage messageClass) //read values from Serial
@@ -29,12 +33,12 @@ IMessage SerialCommunication::readMessage(IMessage messageClass) //read values f
     {
 
 //TODO: USE TIMER INTERRUPT INSTEAD MILLIS()
-        while (Serial.available() > 0) //receive message
+        while (_serial->available() > 0) //receive message
         {
             timerStarted = true; //start timer
             timer = millis();    // set timer to actual time
 
-            bigMessage[bigMessagePtr] = Serial.read();
+            bigMessage[bigMessagePtr] = _serial->read();
             bigMessagePtr++; //increase last free place
         }
 
@@ -108,7 +112,7 @@ void SerialCommunication::sendMessage(char *message, uint16_t messageLength) //s
         ptrMessage++;
     }
 
-    Serial.println(messageWithStrEndMsgChar); //send message
+    _serial->println(messageWithStrEndMsgChar); //send message
     
 }
 

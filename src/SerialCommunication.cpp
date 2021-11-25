@@ -2,6 +2,7 @@
 #include "SerialCommunication.hpp"
 #include "Interfaces/IMessage.hpp"
 #include "Exceptions/Exceptions.hpp"
+#include "Message/Error.hpp"
 
 
 #include <ArduinoJson.h>
@@ -9,7 +10,7 @@
 #include <HardwareSerial.h>
 #include <Arduino.h> //TODO: change to library with millis()method
 
-void SerialCommunication::confSerialCommunication(HardwareSerial *serial, uint16_t baudRate, void (*exceptionMethod)(IMessage))
+void SerialCommunication::confSerialCommunication(HardwareSerial *serial, uint16_t baudRate, void (*exceptionMethod)(Error error))
 {
     //setup serial
     _serial = serial;
@@ -63,7 +64,7 @@ IMessage SerialCommunication::readMessage(IMessage messageClass) //read values f
 
         if ((true == timerStarted) && (timer + WAITING_TIME < millis())) //check if last message's character was received longer than 2 seconds
         {
-            //TODO: add exception
+            //TODO: throw exception
         }
     }
 

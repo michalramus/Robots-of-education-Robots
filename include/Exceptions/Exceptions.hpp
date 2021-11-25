@@ -17,6 +17,8 @@ private:
 
     static void (*_sendMessage)(IMessage); //communication interface
     static IMessage *_message; //message to send
+
+    static bool exceptionCalled; //stores if exception was thrown
 };
 
 

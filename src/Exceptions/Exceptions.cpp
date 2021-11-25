@@ -5,20 +5,25 @@
 
 void Exceptions::throwException(Error error)
 {
-    if (!_sendMessage) //check if _sendMessage method was set
+    if (exceptionCalled == false) //check if exception was already thrown
     {
-        _sendMessage = &SerialCommunication::sendMessage;
+        exceptionCalled = true;
+
+        if (!_sendMessage) //check if _sendMessage method was set
+        {
+            _sendMessage = &SerialCommunication::sendMessage;
+        }
+
+        if (!_message) //check if Message object was created
+        {
+            _message = new Message;
+        }
+
+        _message->setMessageByError(error);
+
+        _sendMessage(*_message); //send error msg
     }
 
-    if(!_message) //check if Message object was created
-    {
-        _message = new Message;
-    }
-
-    _message->setMessageByError(error);
-
-    _sendMessage(*_message); //send error msg
-    
     freezeController();
 }
 
@@ -30,12 +35,12 @@ void Exceptions::setCommunication(IMessage *message, void (*sendMessage)(IMessag
 
 void Exceptions::freezeController()
 {
-    #ifndef TEST
-        while (true) //freeze microcontroller
+#ifndef TEST
+    while (true) //freeze microcontroller
+    {
         {
-            {
-                //empty
-            }
+            //empty
         }
-    #endif
+    }
+#endif
 }

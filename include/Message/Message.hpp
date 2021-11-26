@@ -1,5 +1,6 @@
 #include "Message/Device.hpp"
 #include "Message/Task.hpp"
+#include "Message/Error.hpp"
 #include "Interfaces/IMessage.hpp"
 
 #include <WString.h>
@@ -12,7 +13,8 @@ class Message : public IMessage
 public:
     ~Message(); //destructor
 
-    void setMessageByJson(char *message); //add convert Json message to Message object !!!METHOD DELETE MESSAGE VARIABLE!!!
+    void setMessageByJson(char *message); //convert Json message to Message object !!!METHOD DELETE MESSAGE VARIABLE!!!
+    void setMessageByError(Error error); //set message by error container
 
     char *getCharMessage();         //get message converted to char array
     int16_t getCharMessageLength(); //get length of char array with message after serialization
@@ -41,4 +43,7 @@ private:
     //task
     int8_t taskLength = 0; //size of task array
     Task *tasks = nullptr; //array with tasks
+
+    //error
+    Error *error = nullptr;
 };

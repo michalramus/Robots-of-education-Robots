@@ -3,6 +3,8 @@
 #include "Message/Message.hpp"
 #include "Message/Device.hpp"
 #include "Message/Task.hpp"
+#include "Message/Error.hpp"
+#include "Exceptions/Exceptions.hpp"
 
 #include <ArduinoJson.h>
 
@@ -64,6 +66,17 @@ void Message::setMessageByJson(char *message) //add convert Json message to Mess
     }
 
     doc.clear(); //clear JsonDocument buffer
+}
+
+void Message::setMessageByError(Error error) //set message by error container
+{
+    if(error.isConfigured() == false) //check if error was configured
+    {
+        error.setError(ExceptionsBase::unknownError, "Unknown error");
+    }
+
+    messageType = SymbolsIDs::msgTypeError;
+    this->error = &error;
 }
 
 char *Message::getCharMessage() //get message converted to char array

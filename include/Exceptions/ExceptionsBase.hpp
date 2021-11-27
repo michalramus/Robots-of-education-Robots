@@ -3,5 +3,8 @@
 enum ExceptionsBase
 {
     unknownError,
-    
+
+    incorrectMessage,
+
+    incorrectSymbol,
 };

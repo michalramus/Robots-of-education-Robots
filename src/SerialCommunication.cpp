@@ -64,7 +64,12 @@ IMessage SerialCommunication::readMessage(IMessage messageClass) //read values f
 
         if ((true == timerStarted) && (timer + WAITING_TIME < millis())) //check if last message's character was received longer than 2 seconds
         {
-            //TODO: throw exception
+            //setup error
+            Error error;
+            error.setError(ExceptionsBase::incorrectMessage, "Received incomplete message", bigMessage); 
+
+            //throw exception
+            _throwException(error);
         }
     }
 
@@ -129,6 +134,7 @@ void SerialCommunication::sendMessage(char *message, uint16_t messageLength) //s
         ptrMessage++;
     }
 
+//TODO: test and replace _serial->println to _serial->write
     _serial->println(messageWithStrEndMsgChar); //send message
     
 }

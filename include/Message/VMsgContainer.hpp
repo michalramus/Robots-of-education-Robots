@@ -1,3 +1,6 @@
+#include "Message/Error.hpp"
+#include "Exceptions/Exceptions.hpp"
+
 #include <stdint.h>
 
 #pragma once
@@ -16,5 +19,7 @@ public:
 private:
     int16_t devType = -1; //type of device
     int8_t ID = -1;       //ID of device
+
+    void (*_throwException)(Error error) = &Exceptions::throwException; //method for throwing exception
 };
 

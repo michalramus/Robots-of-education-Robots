@@ -1,4 +1,5 @@
 #include "Message/VMsgContainer.hpp"
+#include "Message/Error.hpp"
 
 #include <stdint.h>
 
@@ -16,7 +17,12 @@ int16_t VMsgContainer::getDevType()
     }
     else
     {
-        //TODO: throw exception
+        //create error
+        Error error;
+
+        //throw exception
+        error.setError(ExceptionsBase::nonSetValue, "Trying to get DevType value in VMsgContainer");
+        _throwException(error);
     }
 }
 
@@ -34,6 +40,11 @@ int8_t VMsgContainer::getID()
     }
     else
     {
-        //TODO: throw exception
+        //create error
+        Error error;
+
+        //throw exception
+        error.setError(ExceptionsBase::nonSetValue, "Trying to get ID value in VMsgContainer");
+        _throwException(error);
     }
 }

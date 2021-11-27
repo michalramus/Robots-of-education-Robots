@@ -1,5 +1,6 @@
 #include "Symbols/SymbolsBase.hpp"
 #include "Symbols/SymbolsIDs.hpp"
+#include "Exceptions/Exceptions.hpp"
 
 #include <WString.h>
 
@@ -26,6 +27,11 @@ int16_t SymbolsBase::getID(String symbol) //get ID of symbol
 
 int16_t SymbolsBase::getID(String symbol, int16_t startID) //get ID of symbol Start search from specific ID
 {
+    if(!_throwException) //check if _throwException was set
+    {
+        _throwException = &Exceptions::throwException;
+    }
+
     for (int i = startID; i < symbolsTabSize; i++) //iterate by table from startID
     {
         if (SymbolsBase::SYMBOLS[i] == symbol) //check symbol
@@ -33,5 +39,25 @@ int16_t SymbolsBase::getID(String symbol, int16_t startID) //get ID of symbol St
             return i;
         }
     }
-    //TODO: throw the exception
+    
+    //create Error
+    Error error;
+
+    //rewrite symbol to char array
+    char symbolChar[symbol.length()];
+
+    for (uint8_t i = 0; i < symbol.length(); i++)
+    {
+        symbolChar[i] = symbol[i];
+    }
+    
+    //throw exception
+    error.setError(ExceptionsBase::incorrectSymbol, "Symbol not found", symbolChar);
+    _throwException(error);
 }
+
+void SymbolsBase::setExceptionMethod(void (*throwException)(Error error))
+{
+    SymbolsBase::_throwException = throwException;
+}
+

@@ -1,3 +1,5 @@
+#include "Message/Error.hpp"
+
 #include <WString.h>
 
 #pragma once
@@ -10,6 +12,8 @@ public:
     static int16_t getID(String symbol);                   //get ID of symbol
     static int16_t getID(String symbol, int16_t startID); //get ID of symbol Start search from specific ID
 
+    static void setExceptionMethod(void (*throwException)(Error error));
 private:
     const static String SYMBOLS[]; //table with symbols
+    static void (*_throwException)(Error error); 
 };

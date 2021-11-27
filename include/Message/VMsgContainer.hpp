@@ -16,7 +16,7 @@ public:
     virtual void setID(int8_t ID);
     virtual int8_t getID();
 
-private:
+protected:
     int16_t devType = -1; //type of device
     int8_t ID = -1;       //ID of device
 

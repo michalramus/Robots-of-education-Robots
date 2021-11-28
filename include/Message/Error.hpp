@@ -6,9 +6,9 @@ class Error
 {
 public:
     //set error object
-    void setError(uint16_t errorType, char *errorMessage); 
-    void setError(uint16_t errorType, char *errorMessage, int32_t errorValue);
-    void setError(uint16_t errorType, char *errorMessage, char *errorValue);
+    void setError(uint16_t errorType, const char errorMessage[]); 
+    void setError(uint16_t errorType, const char errorMessage[], int32_t errorValue);
+    void setError(uint16_t errorType, const char errorMessage[], char *errorValue);
 
     //getters of error object
     uint16_t getErrorType();

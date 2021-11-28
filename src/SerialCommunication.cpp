@@ -4,7 +4,6 @@
 #include "Exceptions/Exceptions.hpp"
 #include "Message/Error.hpp"
 
-
 #include <ArduinoJson.h>
 #include <WString.h>
 #include <HardwareSerial.h>
@@ -22,12 +21,12 @@ void SerialCommunication::confSerialCommunication(HardwareSerial *serial, uint16
 
 IMessage SerialCommunication::readMessage(IMessage messageClass) //read values from Serial
 {
-    if(!_serial) //check if serial was set
+    if (!_serial) //check if serial was set
     {
         _serial = &Serial;
     }
 
-    if(!_throwException) //check if error method was set
+    if (!_throwException) //check if error method was set
     {
         _throwException = &Exceptions::throwException;
     }
@@ -36,15 +35,15 @@ IMessage SerialCommunication::readMessage(IMessage messageClass) //read values f
     bool timerStarted = false;          //check if timer start
     unsigned long int timer = 0;        //time since last message character was received
 
-    bool messageReceived = false;           //was message completely received
+    bool messageReceived = false; //was message completely received
     //TODO: different size after config
-    char bigMessage[SERIAL_RX_BUFFER_SIZE]; //char table (max message size)
-    uint16_t bigMessagePtr = 0;             //first free place in bigMessage variable
+    char *bigMessage = new char[SERIAL_RX_BUFFER_SIZE]; //char table (max message size)
+    uint16_t bigMessagePtr = 0;                         //first free place in bigMessage variable
 
     while (messageReceived == false) //waiting for message
     {
 
-//TODO: USE TIMER INTERRUPT INSTEAD MILLIS()
+        //TODO: USE TIMER INTERRUPT INSTEAD MILLIS()
         while (_serial->available() > 0) //receive message
         {
             timerStarted = true; //start timer
@@ -66,7 +65,7 @@ IMessage SerialCommunication::readMessage(IMessage messageClass) //read values f
         {
             //setup error
             Error error;
-            error.setError(ExceptionsBase::incorrectMessage, "Received incomplete message", bigMessage); 
+            error.setError(ExceptionsBase::incorrectMessage, "Received incomplete message", bigMessage);
 
             //throw exception
             _throwException(error);
@@ -95,7 +94,7 @@ IMessage SerialCommunication::readMessage(IMessage messageClass) //read values f
 void SerialCommunication::sendMessage(IMessage message) //send message
 {
     char *MsgToSend = message.getCharMessage(); //get message converted to char array
-    
+
     sendMessage(MsgToSend, message.getCharMessageLength()); //send message
 }
 
@@ -106,7 +105,7 @@ void SerialCommunication::sendSpecifiedMessage(int16_t type) //send message, tha
 
 void SerialCommunication::sendMessage(char *message, uint16_t messageLength) //send message
 {
-    if(!_serial) //check if serial class was set
+    if (!_serial) //check if serial class was set
     {
         _serial = &Serial;
     }
@@ -134,8 +133,6 @@ void SerialCommunication::sendMessage(char *message, uint16_t messageLength) //s
         ptrMessage++;
     }
 
-//TODO: test and replace _serial->println to _serial->write
+    //TODO: test and replace _serial->println to _serial->write
     _serial->println(messageWithStrEndMsgChar); //send message
-    
 }
-

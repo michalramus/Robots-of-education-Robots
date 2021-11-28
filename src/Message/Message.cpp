@@ -16,23 +16,23 @@ Message::~Message() //destructor
     {
         for (int8_t i = 0; i < devTypesLength; i++)
         {
-            delete devTypes[i];
+            delete[] devTypes[i];
             devTypes[i] = nullptr;
         }
 
-        delete devTypes;
+        delete[] devTypes;
         devTypes = nullptr;
     }
 
     if (Dev != nullptr) //delete Dev array if exists
     {
-        delete Dev;
+        delete[] Dev;
         Dev = nullptr;
     }
 
     if (tasks != nullptr) //delete tasks array if exists
     {
-        delete tasks;
+        delete[] tasks;
         tasks = nullptr;
     }
     

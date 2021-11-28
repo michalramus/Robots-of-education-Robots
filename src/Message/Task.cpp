@@ -10,10 +10,10 @@ Task::~Task()
     {
         for (int8_t i = 0; i < extraValuesSize; i++)
         {
-            delete extraValues[i];
+            delete[] extraValues[i];
         }
 
-        delete extraValues;
+        delete[] extraValues;
         extraValues = nullptr;
     }
 }

@@ -23,7 +23,12 @@ uint8_t *Device::getPinsPtr()
     }
     else
     {
-        //TODO: throw exception
+        //create error
+        Error error;
+
+        //throw exception
+        error.setError(ExceptionsBase::nonSetValue, "Trying to get pins array in Device");
+        _throwException(error);
     }
 
     return 0; //it is not possible to reach this line

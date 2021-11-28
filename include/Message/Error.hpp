@@ -5,8 +5,10 @@
 class Error
 {
 public:
-    void setError(uint16_t errorType, char *errorMessage); //set error object
-    void setError(uint16_t errorType, char *errorMessage, char *errorValue); //set error object
+    //set error object
+    void setError(uint16_t errorType, char *errorMessage); 
+    void setError(uint16_t errorType, char *errorMessage, int32_t errorValue);
+    void setError(uint16_t errorType, char *errorMessage, char *errorValue);
 
     //getters of error object
     uint16_t getErrorType();

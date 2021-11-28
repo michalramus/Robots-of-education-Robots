@@ -1,4 +1,5 @@
 #include "Message/Task.hpp"
+#include "Message/Error.hpp"
 
 #include <stdint.h>
 
@@ -26,7 +27,12 @@ int16_t Task::getTask()
     }
     else
     {
-        //TODO: throw exception
+        //create error
+        Error error;
+
+        //throw exception
+        error.setError(ExceptionsBase::nonSetValue, "Trying to get task value in Task");
+        _throwException(error);
     }
 }
 
@@ -43,11 +49,22 @@ int16_t Task::getExtraValue(int16_t valueID)
             }
         }
         //value ID not found
-        //TODO: throw exception
+        
+        //create error
+        Error error;
+
+        //throw exception
+        error.setError(ExceptionsBase::nonSetValue, "Trying to get extraValue: value not found", valueID);
+        _throwException(error);
     }
     else
     {
-        //TODO: throw exception
+        //create error
+        Error error;
+
+        //throw exception
+        error.setError(ExceptionsBase::nonSetValue, "Trying to get extraValue value in Task: extraValues non set",valueID);
+        _throwException(error);
     }
 }
 
@@ -80,7 +97,12 @@ int8_t Task::getExtraValuesSize()
     }
     else
     {
-        //TODO: throw exception
+        //create error
+        Error error;
+
+        //throw exception
+        error.setError(ExceptionsBase::nonSetValue, "Trying to get extraValuesSize value in Task");
+        _throwException(error);
     }
 }
 

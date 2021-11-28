@@ -54,6 +54,8 @@ int16_t SymbolsBase::getID(String symbol, int16_t startID) //get ID of symbol St
     //throw exception
     error.setError(ExceptionsBase::incorrectSymbol, "Symbol not found", symbolChar);
     _throwException(error);
+
+    return 0; //it is not possible to reach this line
 }
 
 void SymbolsBase::setExceptionMethod(void (*throwException)(Error error))

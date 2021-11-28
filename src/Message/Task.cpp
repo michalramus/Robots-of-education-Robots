@@ -34,6 +34,8 @@ int16_t Task::getTask()
         error.setError(ExceptionsBase::nonSetValue, "Trying to get task value in Task");
         _throwException(error);
     }
+
+    return 0; //it is not possible to reach this line
 }
 
 //getter and setter of extraValue
@@ -66,6 +68,8 @@ int16_t Task::getExtraValue(int16_t valueID)
         error.setError(ExceptionsBase::nonSetValue, "Trying to get extraValue value in Task: extraValues non set",valueID);
         _throwException(error);
     }
+
+    return 0; //it is not possible to reach this line
 }
 
 void Task::setExtraValue(int16_t valueID, int16_t value)
@@ -104,6 +108,8 @@ int8_t Task::getExtraValuesSize()
         error.setError(ExceptionsBase::nonSetValue, "Trying to get extraValuesSize value in Task");
         _throwException(error);
     }
+
+    return 0; //it is not possible to reach this line
 }
 
 void Task::setExtraValuesSize(int8_t size)

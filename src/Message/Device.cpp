@@ -25,4 +25,6 @@ uint8_t *Device::getPinsPtr()
     {
         //TODO: throw exception
     }
+
+    return 0; //it is not possible to reach this line
 }

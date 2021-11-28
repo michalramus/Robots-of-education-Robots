@@ -24,6 +24,8 @@ int16_t VMsgContainer::getDevType()
         error.setError(ExceptionsBase::nonSetValue, "Trying to get DevType value in VMsgContainer");
         _throwException(error);
     }
+
+    return 0; //it is not possible to reach this line
 }
 
 //getter and setter of ID variable
@@ -47,4 +49,6 @@ int8_t VMsgContainer::getID()
         error.setError(ExceptionsBase::nonSetValue, "Trying to get ID value in VMsgContainer");
         _throwException(error);
     }
+
+    return 0; //it is not possible to reach this line
 }

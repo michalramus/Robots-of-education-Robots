@@ -1,13 +1,22 @@
 #include "Message/Error.hpp"
 
-#include "stdint.h"
+#include <stdlib.h>
 
-void Error::setError(uint16_t errorType, char *errorMessage) //set error object
+//set error object
+void Error::setError(uint16_t errorType, char *errorMessage)
 {
     setError(errorType, errorMessage, "");
 }
 
-void Error::setError(uint16_t errorType, char *errorMessage, char *errorValue) //set error object
+void Error::setError(uint16_t errorType, char *errorMessage, int32_t errorValue)
+{
+    char buf[10];              //stores converted errorValue
+    itoa(errorValue, buf, 10); //convert errorValue to string
+
+    setError(errorType, errorMessage, buf);
+}
+
+void Error::setError(uint16_t errorType, char *errorMessage, char *errorValue)
 {
     this->errorType = errorType;
     this->errorMessage = errorMessage;

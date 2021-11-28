@@ -5,7 +5,8 @@
 //set error object
 void Error::setError(uint16_t errorType, char *errorMessage)
 {
-    setError(errorType, errorMessage, "");
+    char empty[] = "";
+    setError(errorType, errorMessage, empty);
 }
 
 void Error::setError(uint16_t errorType, char *errorMessage, int32_t errorValue)

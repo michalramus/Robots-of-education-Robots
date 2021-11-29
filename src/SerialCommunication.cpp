@@ -24,6 +24,7 @@ IMessage SerialCommunication::readMessage(IMessage messageClass) //read values f
     if (!_serial) //check if serial was set
     {
         _serial = &Serial;
+        _serial->begin(DEFAULT_BAUDRATE);
     }
 
     if (!_throwException) //check if error method was set
@@ -108,6 +109,7 @@ void SerialCommunication::sendMessage(char *message, uint16_t messageLength) //s
     if (!_serial) //check if serial class was set
     {
         _serial = &Serial;
+        _serial->begin(DEFAULT_BAUDRATE);
     }
 
     char messageWithStrEndMsgChar[messageLength + (2 * SymbolsBase::getSymbol(SymbolsIDs::startEndMessage).length())]; //create char table with size that includentartEndMessage character

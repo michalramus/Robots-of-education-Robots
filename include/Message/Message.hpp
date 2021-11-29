@@ -2,6 +2,8 @@
 #include "Message/Task.hpp"
 #include "Message/Error.hpp"
 #include "Interfaces/IMessage.hpp"
+#include "Message/Error.hpp"
+#include "Exceptions/Exceptions.hpp"
 
 #include <WString.h>
 #include <ArduinoJson.h>
@@ -19,6 +21,8 @@ public:
     char *getCharMessage();         //get message converted to char array
     int16_t getCharMessageLength(); //get length of char array with message after serialization
 
+    void setExceptionMethod(void (*throwException)(Error error)); //set method for throwing exception
+
     //config
     int8_t getDevTypesLength(); //MSG TYPE: CONFIG get length of array with device types
 
@@ -31,6 +35,8 @@ private:
     void setupTaskMsg(JsonDocument &doc);   //setup message as task
 
     //variables
+    void (*_throwException)(Error error) = &Exceptions::throwException; //method for throwing exception
+
     int16_t charMessageLength = -1; //variable that stores length of char array with message
     int16_t messageType = -1;
 

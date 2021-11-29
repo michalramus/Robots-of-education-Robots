@@ -92,11 +92,22 @@ int16_t Message::getCharMessageLength() //get length of char array with message 
     }
     else
     {
-        //TODO: throw exception
+        //create error
+        Error error;
+
+        //throw exception
+        error.setError(ExceptionsBase::nonSetValue, "CharMessageLength is not set in Message - message not converted to char array: first call getCharMessage() method");
+        _throwException(error);
     }
     
     return 0; //it is not possible to reach this line
 }
+
+void Message::setExceptionMethod(void (*throwException)(Error error)) //set method for throwing exception
+{
+    _throwException = throwException;
+}
+
 
 int8_t Message::getDevTypesLength() //CONFIG get length of array with device types
 {
@@ -106,7 +117,12 @@ int8_t Message::getDevTypesLength() //CONFIG get length of array with device typ
     }
     else
     {
-        //TODO: throw exception
+        //create error
+        Error error;
+
+        //throw exception
+        error.setError(ExceptionsBase::nonSetValue, "DevTypesLength is not set in Message: give JSON to deserialization");
+        _throwException(error);
     }
 
     return 0; //it is not possible to reach this line
@@ -114,11 +130,24 @@ int8_t Message::getDevTypesLength() //CONFIG get length of array with device typ
 
 void Message::deserializeMessage(char *message, JsonDocument &doc) //deserialize message to JsonDocument
 {
-    DeserializationError error = deserializeJson(doc, message); //deserialize message
+    DeserializationError desError = deserializeJson(doc, message); //deserialize message
 
-    if (error == true) //check if deserialization was successful
+    if (desError == true) //check if deserialization was successful
     {
-        //TODO: throw exception(send an error)
+        //create error
+        Error error;
+        char errorText[] = "Deserialization error";
+        char errorMessage[strlen(errorText) + strlen(desError.c_str()) + 2];
+
+        //concatenate errorText and desError to errorMessage
+
+        strcat(errorMessage, errorText);
+        strcat(errorMessage, ": ");
+        strcat(errorMessage, desError.c_str());
+
+        //throw exception
+        error.setError(ExceptionsBase::incorrectMessage, errorMessage, message);
+        _throwException(error);
     }
 }
 

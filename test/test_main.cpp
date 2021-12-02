@@ -1,4 +1,4 @@
-#ifdef TEST
+#ifdef ARDUINO //check if started Arduino tests...
 
 
 #include "Process.hpp"
@@ -16,6 +16,15 @@ void setup()
 void loop() //signalize tests' end on Arduino led
 {
     //empty
+}
+
+#endif
+
+#ifdef NATIVE //...or native tests
+
+int main()
+{
+    return 0;
 }
 
 #endif

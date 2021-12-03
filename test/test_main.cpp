@@ -1,10 +1,12 @@
+#include <unity.h>
+
+
 #ifdef ARDUINO //check if started Arduino tests...
 
+#include <Arduino.h>
 
 #include "Process.hpp"
 
-#include <Arduino.h>
-#include <unity.h>
 
 void setup()
 {
@@ -24,6 +26,10 @@ void loop() //signalize tests' end on Arduino led
 
 int main()
 {
+    UNITY_BEGIN();
+    process(); //run tests
+    UNITY_END();
+
     return 0;
 }
 

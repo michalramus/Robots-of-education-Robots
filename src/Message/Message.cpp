@@ -68,7 +68,7 @@ void Message::setMessageByJson(char *message) //add convert Json message to Mess
     doc.clear(); //clear JsonDocument buffer
 }
 
-void Message::setMessageByError(Error error) //set message by error container
+void Message::setMessageByError(Error &error) //set message by error container
 {
     if(error.isConfigured() == false) //check if error was configured
     {
@@ -137,7 +137,7 @@ void Message::deserializeMessage(char *message, JsonDocument &doc) //deserialize
         //create error
         Error error;
         char errorText[] = "Deserialization error";
-        char errorMessage[strlen(errorText) + strlen(desError.c_str()) + 2];
+        char errorMessage[strlen(errorText) + strlen(desError.c_str()) + 2] = "";
 
         //concatenate errorText and desError to errorMessage
 

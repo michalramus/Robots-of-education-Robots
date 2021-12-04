@@ -16,7 +16,7 @@ public:
     ~Message(); //destructor
 
     void setMessageByJson(char *message); //convert Json message to Message object !!!METHOD DELETE MESSAGE VARIABLE!!!
-    void setMessageByError(Error error); //set message by error container
+    void setMessageByError(Error &error); //set message by error container
 
     char *getCharMessage();         //get message converted to char array
     int16_t getCharMessageLength(); //get length of char array with message after serialization

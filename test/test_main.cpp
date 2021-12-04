@@ -4,14 +4,12 @@
 #ifdef ARDUINO //check if started Arduino tests...
 
 #include <Arduino.h>
-
-#include "Process.hpp"
-
+#include "CommonProcess.hpp"
 
 void setup()
 {
     UNITY_BEGIN();
-    process(); //run tests
+    comProcess(); //run tests
     UNITY_END();
 }
 
@@ -20,14 +18,14 @@ void loop() //signalize tests' end on Arduino led
     //empty
 }
 
-#endif
-
-#ifdef NATIVE //...or native tests
+#else //...or native tests
 
 int main()
 {
+    #include "NativeProcess.hpp"
+
     UNITY_BEGIN();
-    process(); //run tests
+    natProcess(); //run tests
     UNITY_END();
 
     return 0;

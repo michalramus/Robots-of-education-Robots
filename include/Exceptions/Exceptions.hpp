@@ -1,7 +1,11 @@
 #include "Interfaces/IMessage.hpp"
 #include "Message/Error.hpp"
 
-#include <stdint.h>
+#ifndef NATIVE
+    #include <stdint.h>
+#else
+    #include <cstdint>
+#endif
 
 #pragma once
 

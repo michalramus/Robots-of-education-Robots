@@ -2,7 +2,11 @@
 #include "Symbols/SymbolsIDs.hpp"
 #include "Exceptions/Exceptions.hpp"
 
-#include <WString.h>
+#ifndef NATIVE
+    #include <WString.h>
+#else
+    #include <ArduinoFake.h>
+#endif
 
 //TODO: optimize SYMBOLS
 const String SymbolsBase::SYMBOLS[] = {

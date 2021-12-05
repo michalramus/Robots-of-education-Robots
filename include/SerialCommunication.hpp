@@ -1,8 +1,13 @@
 #include "Interfaces/IMessage.hpp"
 #include "Message/Error.hpp"
 
-#include <HardwareSerial.h>
-#include <WString.h>
+#ifndef NATIVE
+    #include <HardwareSerial.h>
+    #include <WString.h>
+#else
+    #include <ArduinoFake.h>
+    #define HardwareSerial SerialFake
+#endif
 
 #pragma once
 class SerialCommunication

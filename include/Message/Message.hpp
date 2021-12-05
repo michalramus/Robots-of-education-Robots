@@ -1,11 +1,15 @@
 #include "Message/Device.hpp"
 #include "Message/Task.hpp"
-#include "Message/Error.hpp"
 #include "Interfaces/IMessage.hpp"
 #include "Message/Error.hpp"
 #include "Exceptions/Exceptions.hpp"
 
-#include <WString.h>
+#ifndef NATIVE
+    #include <WString.h>
+#else
+    #include <cstring>
+#endif
+
 #include <ArduinoJson.h>
 
 #pragma once
@@ -13,18 +17,18 @@
 class Message : public IMessage
 {
 public:
-    ~Message(); //destructor
+    ~Message() override; //destructor
 
-    void setMessageByJson(char *message); //convert Json message to Message object !!!METHOD DELETE MESSAGE VARIABLE!!!
-    void setMessageByError(Error &error); //set message by error container
+    void setMessageByJson(char *message) override; //convert Json message to Message object !!!METHOD DELETE MESSAGE VARIABLE!!!
+    void setMessageByError(Error &error) override; //set message by error container
 
-    char *getCharMessage();         //get message converted to char array
-    int16_t getCharMessageLength(); //get length of char array with message after serialization
+    char *getCharMessage() override;         //get message converted to char array
+    int16_t getCharMessageLength() override; //get length of char array with message after serialization
 
     void setExceptionMethod(void (*throwException)(Error error)); //set method for throwing exception
 
     //config
-    int8_t getDevTypesLength(); //MSG TYPE: CONFIG get length of array with device types
+    int8_t getDevTypesLength() override; //MSG TYPE: CONFIG get length of array with device types
 
 private:
     void deserializeMessage(char *message, JsonDocument &doc); //deserialize message to JsonDocument

@@ -137,7 +137,7 @@ void Message::deserializeMessage(char *message, JsonDocument &doc) //deserialize
         //create error
         Error error;
         char errorText[] = "Deserialization error";
-        char errorMessage[strlen(errorText) + strlen(desError.c_str()) + 2] = "";
+        char errorMessage[strlen(errorText) + strlen(desError.c_str()) + 2];
 
         //concatenate errorText and desError to errorMessage
 

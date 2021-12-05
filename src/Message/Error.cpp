@@ -1,6 +1,10 @@
 #include "Message/Error.hpp"
 
-#include <stdlib.h>
+#ifndef NATIVE
+    #include <stdlib.h>
+#else
+    #include <ArduinoFake.h>
+#endif
 
 //set error object
 void Error::setError(uint16_t errorType, const char errorMessage[])

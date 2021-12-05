@@ -4,10 +4,15 @@
 #include "Exceptions/Exceptions.hpp"
 #include "Message/Error.hpp"
 
-#include <ArduinoJson.h>
-#include <WString.h>
-#include <HardwareSerial.h>
-#include <Arduino.h> //TODO: change to library with millis()method
+
+#ifndef NATIVE
+    #include <WString.h>
+    #include <HardwareSerial.h>
+    #include <Arduino.h> //TODO: change to library with millis()method
+#else
+    #include <ArduinoFake.h>
+    #define HardwareSerial SerialFake
+#endif
 
 void SerialCommunication::confSerialCommunication(HardwareSerial *serial, uint16_t baudRate, void (*exceptionMethod)(Error error))
 {
@@ -21,11 +26,11 @@ void SerialCommunication::confSerialCommunication(HardwareSerial *serial, uint16
 
 IMessage SerialCommunication::readMessage(IMessage messageClass) //read values from Serial
 {
-    if (!_serial) //check if serial was set
-    {
-        _serial = &Serial;
-        _serial->begin(DEFAULT_BAUDRATE);
-    }
+    // if (!_serial) //check if serial was set
+    // {
+    //     _serial = &Serial;
+    //     _serial->begin(DEFAULT_BAUDRATE);
+    // }
 
     if (!_throwException) //check if error method was set
     {
@@ -106,11 +111,11 @@ void SerialCommunication::sendSpecifiedMessage(int16_t type) //send message, tha
 
 void SerialCommunication::sendMessage(char *message, uint16_t messageLength) //send message
 {
-    if (!_serial) //check if serial class was set
-    {
-        _serial = &Serial;
-        _serial->begin(DEFAULT_BAUDRATE);
-    }
+    // if (!_serial) //check if serial class was set
+    // {
+    //     _serial = &Serial;
+    //     _serial->begin(DEFAULT_BAUDRATE);
+    // }
 
     char messageWithStrEndMsgChar[messageLength + (2 * SymbolsBase::getSymbol(SymbolsIDs::startEndMessage).length())]; //create char table with size that includentartEndMessage character
     uint16_t ptrMessage = 0;                                                                                           //pointer, that is set for the first free element in table

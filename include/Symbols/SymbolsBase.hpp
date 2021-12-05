@@ -1,6 +1,10 @@
 #include "Message/Error.hpp"
 
-#include <WString.h>
+#ifndef NATIVE
+    #include <WString.h>
+#else
+    #include <ArduinoFake.h>
+#endif
 
 #pragma once
 

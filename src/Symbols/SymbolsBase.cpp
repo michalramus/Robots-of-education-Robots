@@ -8,6 +8,9 @@
     #include <ArduinoFake.h>
 #endif
 
+void (*SymbolsBase::_throwException)(Error error); 
+
+
 //TODO: optimize SYMBOLS
 const String SymbolsBase::SYMBOLS[] = {
     "x",

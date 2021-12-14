@@ -82,6 +82,7 @@ void Message::setMessageByError(Error &error) //set message by error container
 char *Message::getCharMessage() //get message converted to char array
 {
     //TODO: remember to set charMessageLength variable
+    return "";
 }
 
 int16_t Message::getCharMessageLength() //get length of char array with message after serialization FIRST CALL getCharMessage METHOD

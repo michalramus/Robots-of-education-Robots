@@ -14,6 +14,11 @@
     #define HardwareSerial SerialFake
 #endif
 
+//creation of class-static variables
+HardwareSerial *SerialCommunication::_serial = nullptr;
+void (*SerialCommunication::_throwException)(Error error) = nullptr;
+
+
 void SerialCommunication::confSerialCommunication(HardwareSerial *serial, uint16_t baudRate, void (*exceptionMethod)(Error error))
 {
     //setup serial
@@ -24,7 +29,7 @@ void SerialCommunication::confSerialCommunication(HardwareSerial *serial, uint16
     _throwException = exceptionMethod;
 }
 
-IMessage SerialCommunication::readMessage(IMessage messageClass) //read values from Serial
+IMessage* SerialCommunication::readMessage(IMessage& messageClass) //read values from Serial
 {
     // if (!_serial) //check if serial was set
     // {
@@ -94,10 +99,10 @@ IMessage SerialCommunication::readMessage(IMessage messageClass) //read values f
 
     messageClass.setMessageByJson(smallMessage); //set message from Json
 
-    return messageClass;
+    return &messageClass;
 }
 
-void SerialCommunication::sendMessage(IMessage message) //send message
+void SerialCommunication::sendMessage(IMessage& message) //send message
 {
     char *MsgToSend = message.getCharMessage(); //get message converted to char array
 

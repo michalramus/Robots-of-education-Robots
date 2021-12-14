@@ -120,3 +120,8 @@ void Task::setExtraValuesSize(int8_t size)
 {
     this->extraValuesSize = size;
 }
+
+void Task::setTask(int16_t task) 
+{
+    /* ToDo: Implementation here */
+}

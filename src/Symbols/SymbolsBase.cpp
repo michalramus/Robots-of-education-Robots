@@ -2,7 +2,11 @@
 #include "Symbols/SymbolsIDs.hpp"
 #include "Exceptions/Exceptions.hpp"
 
+#ifndef NATIVE
 #include <WString.h>
+#else
+#include <ArduinoFake.h>
+#endif
 
 //TODO: optimize SYMBOLS
 const String SymbolsBase::SYMBOLS[] = {
@@ -27,7 +31,7 @@ int16_t SymbolsBase::getID(String symbol) //get ID of symbol
 
 int16_t SymbolsBase::getID(String symbol, int16_t startID) //get ID of symbol Start search from specific ID
 {
-    if(!_throwException) //check if _throwException was set
+    if (!_throwException) //check if _throwException was set
     {
         _throwException = &Exceptions::throwException;
     }
@@ -39,7 +43,7 @@ int16_t SymbolsBase::getID(String symbol, int16_t startID) //get ID of symbol St
             return i;
         }
     }
-    
+
     //create Error
     Error error;
 
@@ -50,7 +54,7 @@ int16_t SymbolsBase::getID(String symbol, int16_t startID) //get ID of symbol St
     {
         symbolChar[i] = symbol[i];
     }
-    
+
     //throw exception
     error.setError(ExceptionsBase::incorrectSymbol, "Symbol not found", symbolChar);
     _throwException(error);
@@ -62,4 +66,3 @@ void SymbolsBase::setExceptionMethod(void (*throwException)(Error error))
 {
     SymbolsBase::_throwException = throwException;
 }
-

@@ -1,8 +1,12 @@
 #include "Message/VMsgContainer.hpp"
 
+#ifndef NATIVE
 #include <stdint.h>
+#else
+#include <ArduinoFake.h>
+#endif
 
-#pragma once 
+#pragma once
 
 class Task : public VMsgContainer
 {
@@ -15,7 +19,7 @@ public:
 
     //getter and setter of extraValue
     int16_t getExtraValue(int16_t valueID);
-    void setExtraValue(int16_t valueID, int16_t value);//important to set extraValuesSize first
+    void setExtraValue(int16_t valueID, int16_t value); //important to set extraValuesSize first
 
     //getter and setter of extraValuesSize
     int8_t getExtraValuesSize();

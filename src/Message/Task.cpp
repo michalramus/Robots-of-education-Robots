@@ -1,7 +1,11 @@
 #include "Message/Task.hpp"
 #include "Message/Error.hpp"
 
+#ifndef NATIVE
 #include <stdint.h>
+#else
+#include <ArduinoFake.h>
+#endif
 
 Task::~Task()
 {
@@ -51,7 +55,7 @@ int16_t Task::getExtraValue(int16_t valueID)
             }
         }
         //value ID not found
-        
+
         //create error
         Error error;
 
@@ -65,7 +69,7 @@ int16_t Task::getExtraValue(int16_t valueID)
         Error error;
 
         //throw exception
-        error.setError(ExceptionsBase::nonSetValue, "Trying to get extraValue value in Task: extraValues non set",valueID);
+        error.setError(ExceptionsBase::nonSetValue, "Trying to get extraValue value in Task: extraValues non set", valueID);
         _throwException(error);
     }
 

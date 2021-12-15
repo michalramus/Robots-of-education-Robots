@@ -4,10 +4,14 @@
 #include "Exceptions/Exceptions.hpp"
 #include "Message/Error.hpp"
 
-#include <ArduinoJson.h>
-#include <WString.h>
-#include <HardwareSerial.h>
-#include <Arduino.h> //TODO: change to library with millis()method
+
+#ifndef NATIVE
+    #include <WString.h>
+    #include <HardwareSerial.h>
+    #include <Arduino.h> //TODO: change to library with millis()method
+#else
+    #include <ArduinoFake.h>
+#endif
 
 void SerialCommunication::confSerialCommunication(HardwareSerial *serial, uint16_t baudRate, void (*exceptionMethod)(Error error))
 {

@@ -1,7 +1,11 @@
 #include "Message/VMsgContainer.hpp"
 #include "Message/Error.hpp"
 
+#ifndef NATIVE
 #include <stdint.h>
+#else
+#include <ArduinoFake.h>
+#endif
 
 //getter and setter of devType variable
 void VMsgContainer::setDevType(int16_t devType)

@@ -1,7 +1,11 @@
 #include "Message/Error.hpp"
 #include "Exceptions/Exceptions.hpp"
 
+#ifndef NATIVE
 #include <stdint.h>
+#else
+#include <ArduinoFake.h>
+#endif
 
 #pragma once
 
@@ -22,4 +26,3 @@ protected:
 
     void (*_throwException)(Error error) = &Exceptions::throwException; //method for throwing exception
 };
-

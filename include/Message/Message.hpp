@@ -1,11 +1,15 @@
 #include "Message/Device.hpp"
 #include "Message/Task.hpp"
-#include "Message/Error.hpp"
 #include "Interfaces/IMessage.hpp"
 #include "Message/Error.hpp"
 #include "Exceptions/Exceptions.hpp"
 
+#ifndef NATIVE
 #include <WString.h>
+#else
+#include <ArduinoFake.h>
+#endif
+
 #include <ArduinoJson.h>
 
 #pragma once

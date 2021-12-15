@@ -1,6 +1,10 @@
 #include "Message/Error.hpp"
 
+#ifndef NATIVE
 #include <stdlib.h>
+#else
+#include <ArduinoFake.h>
+#endif
 
 //set error object
 void Error::setError(uint16_t errorType, const char errorMessage[])
@@ -20,7 +24,7 @@ void Error::setError(uint16_t errorType, const char errorMessage[], int32_t erro
 void Error::setError(uint16_t errorType, const char errorMessage[], char *errorValue)
 {
     this->errorType = errorType;
-    this->errorMessage = (char*)errorMessage;
+    this->errorMessage = (char *)errorMessage;
     this->errorValue = errorValue;
     configured = true;
 }

@@ -42,6 +42,11 @@ int16_t Task::getTask()
     return 0; //it is not possible to reach this line
 }
 
+void Task::setTask(int16_t task)
+{
+    this->task = task;
+}
+
 //getter and setter of extraValue
 int16_t Task::getExtraValue(int16_t valueID)
 {

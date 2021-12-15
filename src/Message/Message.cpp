@@ -82,6 +82,7 @@ void Message::setMessageByError(Error &error) //set message by error container
 char *Message::getCharMessage() //get message converted to char array
 {
     //TODO: remember to set charMessageLength variable
+
 }
 
 int16_t Message::getCharMessageLength() //get length of char array with message after serialization FIRST CALL getCharMessage METHOD
@@ -137,7 +138,7 @@ void Message::deserializeMessage(char *message, JsonDocument &doc) //deserialize
         //create error
         Error error;
         char errorText[] = "Deserialization error";
-        char errorMessage[strlen(errorText) + strlen(desError.c_str()) + 2] = "";
+        char errorMessage[strlen(errorText) + strlen(desError.c_str()) + 2];
 
         //concatenate errorText and desError to errorMessage
 

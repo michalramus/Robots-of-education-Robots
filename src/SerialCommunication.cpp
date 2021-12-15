@@ -11,7 +11,13 @@
     #include <Arduino.h> //TODO: change to library with millis()method
 #else
     #include <ArduinoFake.h>
+    #define HardwareSerial SerialFake
 #endif
+
+//creation of class-static variables
+HardwareSerial *SerialCommunication::_serial = nullptr;
+void (*SerialCommunication::_throwException)(Error error) = nullptr;
+
 
 void SerialCommunication::confSerialCommunication(HardwareSerial *serial, uint16_t baudRate, void (*exceptionMethod)(Error error))
 {
@@ -23,14 +29,8 @@ void SerialCommunication::confSerialCommunication(HardwareSerial *serial, uint16
     _throwException = exceptionMethod;
 }
 
-IMessage SerialCommunication::readMessage(IMessage messageClass) //read values from Serial
+IMessage* SerialCommunication::readMessage(IMessage& messageClass) //read values from Serial
 {
-    if (!_serial) //check if serial was set
-    {
-        _serial = &Serial;
-        _serial->begin(DEFAULT_BAUDRATE);
-    }
-
     if (!_throwException) //check if error method was set
     {
         _throwException = &Exceptions::throwException;
@@ -93,10 +93,10 @@ IMessage SerialCommunication::readMessage(IMessage messageClass) //read values f
 
     messageClass.setMessageByJson(smallMessage); //set message from Json
 
-    return messageClass;
+    return &messageClass; //TODO: check return
 }
 
-void SerialCommunication::sendMessage(IMessage message) //send message
+void SerialCommunication::sendMessage(IMessage& message) //send message
 {
     char *MsgToSend = message.getCharMessage(); //get message converted to char array
 
@@ -110,12 +110,6 @@ void SerialCommunication::sendSpecifiedMessage(int16_t type) //send message, tha
 
 void SerialCommunication::sendMessage(char *message, uint16_t messageLength) //send message
 {
-    if (!_serial) //check if serial class was set
-    {
-        _serial = &Serial;
-        _serial->begin(DEFAULT_BAUDRATE);
-    }
-
     char messageWithStrEndMsgChar[messageLength + (2 * SymbolsBase::getSymbol(SymbolsIDs::startEndMessage).length())]; //create char table with size that includentartEndMessage character
     uint16_t ptrMessage = 0;                                                                                           //pointer, that is set for the first free element in table
 

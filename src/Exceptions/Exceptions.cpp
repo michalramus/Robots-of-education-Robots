@@ -3,6 +3,13 @@
 #include "Message/Error.hpp"
 #include "Message/Message.hpp"
 
+//create class-static variables
+void (*Exceptions::_sendMessage)(IMessage &) = nullptr; //communication interface
+IMessage *Exceptions::_message = nullptr;  //message to send
+
+bool Exceptions::exceptionCalled = false;
+
+
 void Exceptions::throwException(Error error)
 {
     if (exceptionCalled == false) //check if exception was already thrown
@@ -27,7 +34,7 @@ void Exceptions::throwException(Error error)
     freezeController();
 }
 
-void Exceptions::setCommunication(IMessage *message, void (*sendMessage)(IMessage))
+void Exceptions::setCommunication(IMessage *message, void (*sendMessage)(IMessage&))
 {
     _message = message;
     _sendMessage = sendMessage;

@@ -11,14 +11,14 @@
 class IMessage
 {
 public:
-    virtual ~IMessage();
+    virtual ~IMessage() {}
 
-    virtual void setMessageByJson(char *message);
-    virtual void setMessageByError(Error &error); //set message by error container
+    virtual void setMessageByJson(char *message) = 0;
+    virtual void setMessageByError(Error &error) = 0; //set message by error container
 
-    virtual char *getCharMessage();
-    virtual int16_t getCharMessageLength();
+    virtual char *getCharMessage() = 0;
+    virtual int16_t getCharMessageLength() = 0;
 
     //config
-    virtual int8_t getDevTypesLength();
+    virtual int8_t getDevTypesLength() = 0;
 };

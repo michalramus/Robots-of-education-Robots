@@ -20,10 +20,10 @@ void loop() //signalize tests' end on Arduino led
 
 #else //...or native tests
 
+#include "NativeProcess.hpp"
+
 int main()
 {
-    #include "NativeProcess.hpp"
-
     UNITY_BEGIN();
     natProcess(); //run tests
     UNITY_END();

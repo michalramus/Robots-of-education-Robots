@@ -1,3 +1,7 @@
+#ifdef NATIVE
+    #include <ArduinoFake.h>
+#endif
+
 #include "Symbols/Symbols.hpp"
 #include <unity.h>
 
@@ -7,52 +11,48 @@
 
 class natUnitTest_SymbolsBase
 {
-    public:
-
+public:
     //getSymbol
-    static void natUnitTest_getSymbol_getCorrectSymbol()
+    static void natUnit_getSymbol_getCorrectSymbol_returnSymbol(int ID,  char Symbol[])
     {
-        TEST_ASSERT(SymbolsBase::getSymbol(0) == "x");
-        TEST_ASSERT(SymbolsBase::getSymbol(3) == "config");
-        TEST_ASSERT(SymbolsBase::getSymbol(5) == "task");
+        TEST_ASSERT_EQUAL_STRING(Symbol, SymbolsBase::getSymbol(ID).c_str());
     }
 
-    static void natUnitTest_getSymbol_TryToGetSymbolByIncorrectID()
+
+    static void natUnit_getSymbol_TryToGetSymbolByIncorrectID_throwException()
     {
     }
 
     //getID 1arg
-    static void natUnitTest_getID_1arg_getCorrectID()
+    static void natUnit_getID_1arg_getCorrectID_returnID()
     {
     }
 
-    static void natUnitTest_getID_1arg_tryToGetIDByIncorrectSymbol()
+
+    static void natUnit_getID_1arg_tryToGetIDByIncorrectSymbol_throwException()
     {
     }
 
     //getID 2arg
-    static void natUnitTest_getID_2arg_getCorrectID()
+    static void natUnit_getID_2arg_getCorrectID_returnID()
     {
     }
 
-    static void natUnitTest_getID_2arg_tryToGetIDByIncorrectSymbol()
+    static void natUnit_getID_2arg_tryToGetIDByIncorrectSymbol_throwException()
     {
     }
 
-    static void natUnitTest_getID_2arg_tryToGetIDWithIncorrectStartID()
+    static void natUnit_getID_2arg_tryToGetIDWithIncorrectStartID_throwException()
     {
     }
 
-    static void natUnitTest_getID_2arg_tryToGetIDWithIncorrectStartIDAndSymbol()
+    static void natUnit_getID_2arg_tryToGetIDWithIncorrectStartIDAndSymbol_throwExcpetion()
     {
-
     }
-
 
     //start unit tests
     static void natUnitTest_SymbolsBase_process() //call all tests
     {
-
     }
 };
 

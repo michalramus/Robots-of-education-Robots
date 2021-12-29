@@ -1,4 +1,3 @@
-
 #include "Symbols/Symbols.hpp"
 #include "Message/Message.hpp"
 #include "Message/Device.hpp"
@@ -8,8 +7,10 @@
 
 #include <ArduinoJson.h>
 
+typedef StaticJsonDocument<JSON_BUFFER_SIZE> StaticDocument;
+
 //TODO: update jsonDocument
-//TODO: check if config message was sended more than 2 times
+//TODO: check if config message was sent more than 2 times
 Message::~Message() //destructor
 {
     if (devTypes != nullptr) //delete devTypes array if exists
@@ -42,30 +43,36 @@ void Message::setMessageByJson(char *message) //add convert Json message to Mess
 {
     //TODO: different JsonBufferSize after config
     //create JsonDocument
-    StaticJsonDocument<JSON_BUFFER_SIZE> doc;
+    StaticDocument doc;
     Message::deserializeMessage(message, doc);
 
     delete[] message;
 
-    messageType = getMessageTypeID(doc); //set message type
-
-    switch (messageType) //check message type
-    {
-    case SymbolsIDs::msgTypeError:
-        //TODO: add setup error message
-        break;
-    case SymbolsIDs::msgTypeConfig:
-        setupConfigMsg(doc);
-        break;
-    case SymbolsIDs::msgTypeInfo:
-        //TODO: add setup for info message
-        break;
-    case SymbolsIDs::msgTypeTask:
-        setupTaskMsg(doc);
-        break;
-    }
-
+    this->initMessageByType(this->getMessageTypeID(doc), doc);
     doc.clear(); //clear JsonDocument buffer
+}
+
+void Message::initMessageByType(int16_t type, StaticDocument JSONdocument)
+{
+    using enum SymbolsIDs;
+
+    switch (type)
+    {
+        case msgTypeError:
+            //TODO: add setup error message
+            break;
+        case msgTypeConfig:
+            setupConfigMsg(JSONdocument);
+            break;
+        case msgTypeInfo:
+            //TODO: add setup for info message
+            break;
+        case msgTypeTask:
+            setupTaskMsg(JSONdocument);
+            break;
+        default:
+            // invalid type broker; error msg
+    }
 }
 
 void Message::setMessageByError(Error &error) //set message by error container
@@ -82,16 +89,12 @@ void Message::setMessageByError(Error &error) //set message by error container
 char *Message::getCharMessage() //get message converted to char array
 {
     //TODO: remember to set charMessageLength variable
-
+    ////this->charMessageLength
 }
 
 int16_t Message::getCharMessageLength() //get length of char array with message after serialization FIRST CALL getCharMessage METHOD
 {
-    if (charMessageLength != -1)
-    {
-        return charMessageLength;
-    }
-    else
+    if (charMessageLength == -1)
     {
         //create error
         Error error;
@@ -101,7 +104,7 @@ int16_t Message::getCharMessageLength() //get length of char array with message 
         _throwException(error);
     }
     
-    return 0; //it is not possible to reach this line
+    return charMessageLength;
 }
 
 void Message::setExceptionMethod(void (*throwException)(Error error)) //set method for throwing exception
@@ -223,7 +226,8 @@ void Message::setupTaskMsg(JsonDocument &doc) //setup Message as task
 
         for (int j = 0; j < tasks[i].getExtraValuesSize(); j++) //set extra values
         {
-            tasks[i].setExtraValue(doc[SymbolsBase::getSymbol(SymbolsIDs::msgTypeTask) + i][SymbolsBase::getSymbol(SymbolsIDs::msgTaskExtraVal) + j][0], doc[SymbolsBase::getSymbol(SymbolsIDs::msgTypeTask) + i][SymbolsBase::getSymbol(SymbolsIDs::msgTaskExtraVal) + j][1]); //set extra values
+            tasks[i].setExtraValue(doc[SymbolsBase::getSymbol(SymbolsIDs::msgTypeTask) + i][SymbolsBase::getSymbol(SymbolsIDs::msgTaskExtraVal) + j][0],
+                                   doc[SymbolsBase::getSymbol(SymbolsIDs::msgTypeTask) + i][SymbolsBase::getSymbol(SymbolsIDs::msgTaskExtraVal) + j][1]); //set extra values
         }
     }
 }

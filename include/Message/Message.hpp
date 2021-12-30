@@ -3,6 +3,7 @@
 #include "Interfaces/IMessage.hpp"
 #include "Message/Error.hpp"
 #include "Exceptions/Exceptions.hpp"
+#include "Symbols/Symbols.hpp"
 
 #ifndef NATIVE
 #include <WString.h>
@@ -37,6 +38,8 @@ private:
 
     void setupConfigMsg(JsonDocument &doc); //setup message as config
     void setupTaskMsg(JsonDocument &doc);   //setup message as task
+
+    void initMessageByType(int16_t type, StaticJsonDocument<JSON_BUFFER_SIZE> doc);
 
     //variables
     void (*_throwException)(Error error) = &Exceptions::throwException; //method for throwing exception

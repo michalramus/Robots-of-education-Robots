@@ -38,7 +38,7 @@ int16_t SymbolsBase::getID(String symbol, int16_t startID) //get ID of symbol St
         _throwException = &Exceptions::throwException;
     }
 
-    for (int i = startID; i < symbolsTabSize; i++) //iterate by table from startID
+    for (int i = startID; i < SymbolsIDs::symbolsTabSize; i++) //iterate by table from startID
     {
         if (SymbolsBase::SYMBOLS[i] == symbol) //check symbol
         {

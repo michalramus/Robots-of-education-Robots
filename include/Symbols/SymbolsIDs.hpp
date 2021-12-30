@@ -1,6 +1,6 @@
 #pragma once
 
-enum SymbolsIDs //id of communication symbols
+enum class SymbolsIDs //id of communication symbols
 {
     startEndMessage = 0, //symbol that is on the begin and end of message
 

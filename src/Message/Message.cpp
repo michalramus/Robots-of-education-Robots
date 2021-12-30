@@ -54,24 +54,23 @@ void Message::setMessageByJson(char *message) //add convert Json message to Mess
 
 void Message::initMessageByType(int16_t type, StaticDocument JSONdocument)
 {
-    using enum SymbolsIDs;
-
     switch (type)
     {
-        case msgTypeError:
+        case SymbolsIDs::msgTypeError:
             //TODO: add setup error message
             break;
-        case msgTypeConfig:
+        case SymbolsIDs::msgTypeConfig:
             setupConfigMsg(JSONdocument);
             break;
-        case msgTypeInfo:
+        case SymbolsIDs::msgTypeInfo:
             //TODO: add setup for info message
             break;
-        case msgTypeTask:
+        case SymbolsIDs::msgTypeTask:
             setupTaskMsg(JSONdocument);
             break;
         default:
             // invalid type broker; error msg
+            break;
     }
 }
 

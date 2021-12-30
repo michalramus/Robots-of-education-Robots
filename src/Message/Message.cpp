@@ -72,6 +72,8 @@ void Message::initMessageByType(int16_t type, StaticDocument JSONdocument)
             // invalid type broker; error msg
             break;
     }
+
+    this->messageType = type;
 }
 
 void Message::setMessageByError(Error &error) //set message by error container
